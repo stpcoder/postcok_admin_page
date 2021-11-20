@@ -1,0 +1,237 @@
+#n1_192 {
+	width: 100%;
+	height: 100vh;
+	background-color: #D5DFEF;
+}
+
+#n1_190 {
+  background: white;
+  width: 100%;
+  height: 150px;
+}
+
+/* Rectangle 2 */
+#n1_197 {
+  margin-left: auto;
+  float: left;
+  margin: 69px 200px 0px 0px;
+  text-align: center;
+  background: rgb(255, 255, 255);
+  width: 550px;
+  height: 700px;
+  box-shadow: 3px 3px 3px;
+  border-radius: 30px 30px 30px 30px;
+}
+
+/* 초기 설정 */
+#n1_198 {
+  margin: 15px 0px 0px 0px;
+  font-size: 55px;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 76.1719px;
+  height: 76px;
+}
+
+/* Rectangle 4 */
+#n1_199 {
+  padding: 106px 0px 0px 0px;
+  margin: 15px 0px 0px 0px;
+  position: fiexd;
+  background: rgb(175, 193, 226);
+  width: 550px;
+  height: 500px;
+  border-radius: 0px 0px 30px 30px;
+  box-shadow: 3px 3px 3px;
+}
+
+
+/* Rectangle 6 */
+#n1_201 {
+  margin : 0px 25px 50px 25px;
+  background: rgb(255, 255, 255);
+  left: 247px;
+  width: 500px;
+  top: 427px;
+  height: 150px;
+  border-radius: 30px 30px 30px 30px;
+  box-shadow: 3px 3px 3px;
+}
+
+/* 주식 정보 수정 */
+#n1_202 {
+  float:left;
+  margin: 48px 29px 38px 0px;
+  font-size: 50px;
+  font-weight: 400;
+  transform: translate(0px, 0px);
+  line-height: 64.4531px;
+  height: 64px;
+}
+
+/* 관리자_주식 정보 수정 */
+#n1_203 {
+  float :left;
+  margin: 20px 15px 25px 50px;
+  background-image: url("https://s3-alpha-sig.figma.com/img/81fd/d7d8/caf924e8904d8591e287ccc08826a99f?Expires=1638144000&Signature=Z5~epko-i8Oc4SE6e9hRo0UutsoKgWKdm5uVRmVVXxUvQHKi8Y-rezZwwFzyQgOAg1MZ9uDrmX2GP~SzoTvTd~efhoH9QFwhZDwUNZYo2MoMma2OEbEudNCzGQs04-CWhEX3XeA6a4YjR3R~jdymcybgQujxt2ldj9AI03ik0aJJM6I8NWJuWA1u~WaCWNaw2Ks7~~Jl0PrGO-DKszfjXgqGrH2IDHJt-3zAC6TYzfdjO6~Rpd5jiNqaYL2MSeChLY2YciJCAVHiEUmwagqjeZ-OyD1WaMpR3Cx9AoPCx7rEF724X0x9dEkL9WWhDzVpOvym8eq0tdM8uu71RdfP4w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  left: 251px;
+  width: 100px;
+  top: 452px;
+  height: 100px;
+}
+
+
+/* Rectangle 7 */
+#n1_205 {
+  margin : 0px 25px 50px 25px;
+  background: rgb(255, 255, 255);
+  left: 247px;
+  width: 500px;
+  top: 427px;
+  height: 150px;
+  border-radius: 30px 30px 30px 30px;
+  box-shadow: 3px 3px 3px;
+}
+
+/* 참가자 정보 수정 */
+#n1_206 {
+  margin: 43px 0px 43px 15px;
+  float: left;
+  font-size: 50px;
+  font-weight: 400;
+  vertical-align: middle;
+  line-height: 64.4531px;
+  height: 64px;
+}
+
+/* 관리자_참가자 정보 수정 */
+#n1_207 {
+  margin: 25px 0px 25px 25px;
+  float: left;
+  background-image: url("https://s3-alpha-sig.figma.com/img/a234/ca60/3346f1f33f6812890e12b5af1c601dc4?Expires=1638144000&Signature=K8oi9BrU~rBPX8AWyhHoFVvfZsHVmlx11ohkQGJngeRwIdkA9evUdB79sstLz-XjwBmJX3olCypPhCfWm55wuX4IGu4Ayzz-dJMj9GsjC33VviEW~rhyLS3eGTRp1sS0r3gtO1w9vE6B1J0-gPLjDKtetJVXF4IhVCELFw3JQJatJJgku45FzHfdv0WX35ItXxFhJ82GC3OALxC9Q~1glJgWvsG7Xxw4PhRa7j3KxeH0n1QQ1LT~IigZkGWyMF3acnzy3KeLjFl2hlLM1mmDZZIDyPfeJY9LIZAmeNMc8lrb1rFU5Drw-olFcB60GuJhWd-dSs~FMfagNzW~tVt2lg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
+  background-size: cover;
+  background-repeat: no-repeat;
+  left: 251px;
+  width: 100px;
+  top: 742px;
+  height: 100px;
+}
+
+/* Rectangle 3 */
+#n1_209 {
+  margin-right: auto;
+  float: left;
+  margin: 69px 0px 0px 0px;
+  text-align: center;
+  background: rgb(255, 255, 255);
+  width: 550px;
+  height: 700px;
+  box-shadow: 3px 3px 3px;
+  border-radius: 30px 30px 30px 30px;
+}
+
+/* 진행 중 조작 사항 */
+#n1_210 {
+  margin: 15px 0px 0px 0px;
+  font-size: 55px;
+  font-weight: 400;
+  vertical-align: middle;
+  line-height: 76.1719px;
+  height: 76px;
+}
+
+/* Rectangle 5 */
+#n1_211 {
+  padding: 106px 0px 0px 0px;
+  margin: 15px 0px 0px 0px;
+  position: fiexd;
+  background: rgb(175, 193, 226);
+  width: 550px;
+  height: 500px;
+  border-radius: 0px 0px 30px 30px;
+  box-shadow: 3px 3px 3px;
+}
+
+
+/* Rectangle 8 */
+#n1_213 {
+  margin : 0px 25px 50px 25px;
+  background: rgb(255, 255, 255);
+  left: 247px;
+  width: 500px;
+  top: 427px;
+  height: 150px;
+  border-radius: 30px 30px 30px 30px;
+  box-shadow: 3px 3px 3px;
+}
+
+/* 현재 상황 */
+#n1_214 {
+  float: left;
+  margin: 45px 88px 48px 0px;
+  font-size: 50px;
+  font-weight: 400;
+  vertical-align: middle;
+  line-height: 64.4531px;
+  height: 64px;
+}
+
+/* 관리자_현재 현황 */
+#n1_215 {
+  float: left;
+  margin: 20px 20px 30px 90px;
+  background-image: url("https://s3-alpha-sig.figma.com/img/55fd/9adc/89db6bc0590ad44f7140337cf43e1ac4?Expires=1638144000&Signature=CUDckz4GRK2Ad~YP8nvbsKm3sZhcA0LX3QEtsZr5s5AKr5g9lH8Olgw78fd6OEAr3o7VE4U2T3Sg3Ov9NJMB3ipY0SqJGwZo1~9pDF7bv1a75kIpie8aIHAA0kPTqHvsnXVnFhZlD49aewR4uktOGTX2e17F-yL0NUev3HCtlStBvUbPNtOVgkarC5YYII3mrY4M~nLFzOu3SiFbqvr5pa4ua66OyOTubvXYSIKc5AH0J416Khfa1R~9a9yrdDIO3rlQmNe7PTFGL8isHBI6czUXhzH30MZ3snYgkvNHoalzmRdop0tzDRdfhjvM1XVcwyL7kuLdKwpInAcQ-ER5zA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  left: 1166px;
+  width: 100px;
+  top: 452px;
+  height: 100px;
+}
+
+
+/* Rectangle 9 */
+#n1_217 {
+  margin : 0px 25px 50px 25px;
+  background: rgb(255, 255, 255);
+  left: 247px;
+  width: 500px;
+  top: 427px;
+  height: 150px;
+  border-radius: 30px 30px 30px 30px;
+  box-shadow: 3px 3px 3px;
+}
+
+/* 전체 설정 */
+#n1_218 {
+  margin: 45px 88px 48px 0px;
+  float: left;
+  font-size: 50px;
+  font-weight: 400;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  line-height: 64.4531px;
+  height: 60px;
+}
+
+/* 관리자_전체 설정 */
+#n1_219 {
+  float: left;
+  margin: 20px 20px 30px 90px;
+  background-image: url("https://s3-alpha-sig.figma.com/img/481a/73dc/47057944d00e2d16650610559eff0bc4?Expires=1638144000&Signature=fbsQOhCNBWLuomYUUTHF6ptxGSmcrOe7FWp81oNnlBAa3H8Ktjwpis2166ITrLivVU7y55-rhzP-HORiPby9a7NykDEV2A3k3Agnt7UxOyi5Jn2Gsm7b-E0Z24bIB5jumEM22HeDfGWoitc2NGY8nIXs2Oen5bEDVe9asCREJEm~mEQW9g4odyqCzpwysSSXdCSpdUzzP7mtvfro5lrrzB9Je2BqqrME146IkDp0IEohuQ8CO6DRQSCFBl06j5HClh3XYs3~mGVT4gQjunnzKPltSeohcUb4KlgL4K7CKmeEzWq7RiHpk8oqU9H8e1ePkT9~gEt6bdlORl7HdO5plA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+
+#n1_200 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1300px;
+  height: 900px;
+}
