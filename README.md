@@ -72,4 +72,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 =======
 # postcok_admin_page
 POSTOCK admin page
+
+npx serve -s build //서버 실행시키기
+npm run watch
+
 >>>>>>> ca20b5dc81a6ec1f86d1614d642ecdf7f0979031
