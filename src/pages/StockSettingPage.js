@@ -43,15 +43,17 @@ export default function StockSettingPage({ price, setPrice }) {
 
   return (
     <div>
-      <div class="frame" id="n1_192">
-        <div class="topbar" id="n1_193">
-          <div class="topbar-background" id="n1_194">
-            <img src={mainLogo} id="n1_195" alt="logo"/>
+      <div class="frame" id="n2_192">
+        <div class="topbar" id="n2_193">
+          <div class="topbar-background" id="n2_194">
+            <img src={mainLogo} id="n2_195" alt="logo"/>
           </div>
         </div>
-        <div class="left top rectangle" id="n1_175"></div>
-        <div class="left top text" id="n1_174">주식 정보 수정</div>
-        <div id="n1_200">
+        <div id="n2">
+          <div class="left top rectangle" id="n2_175"></div>
+          <div class="left top text" id="n2_174">주식 정보 수정</div>
+        </div>
+        <div id="n2_2">
           <table class="tg">
             <thead>
               <tr>
@@ -63,7 +65,7 @@ export default function StockSettingPage({ price, setPrice }) {
             </thead>
             <tbody>
               <tr>
-                <td class="tg-c3ow" id="n1_11"></td>
+                <td class="tg-c3ow"><div id="n2_11"></div></td>
                 <td class="tg-c3ow">생명</td>
                 <td class="tg-c3ow">
                   <input id="10" onChange={onChangeValue}/>
@@ -97,7 +99,7 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
               </tr>
               <tr>
-                <td class="tg-c3ow" id="n1_13"></td>
+                <td class="tg-c3ow"><div id="n2_13"></div></td>
                 <td class="tg-c3ow">전자</td>
                 <td class="tg-c3ow">
                   <input id="20" onChange={onChangeValue}/>
@@ -131,7 +133,7 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
               </tr>
               <tr>
-                <td class="tg-c3ow" id="n1_9"></td>
+                <td class="tg-c3ow"><div id="n2_9"></div></td>
                 <td class="tg-c3ow">건축</td>
                 <td class="tg-c3ow">
                   <input id="30" onChange={onChangeValue}/>
@@ -165,7 +167,7 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
               </tr>
               <tr>
-                <td class="tg-c3ow" id="n1_12"></td>
+                <td class="tg-c3ow"><div id="n2_12"></div></td>
                 <td class="tg-c3ow">식품</td>
                 <td class="tg-c3ow">
                   <input id="40" onChange={onChangeValue}/>
@@ -199,7 +201,7 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
               </tr>
               <tr>
-                <td class="tg-c3ow" id="n1_10"></td>
+                <td class="tg-c3ow"><div id="n2_10"></div></td>
                 <td class="tg-c3ow">방송</td>
                 <td class="tg-c3ow">
                   <input id="50" onChange={onChangeValue}/>
@@ -235,12 +237,12 @@ export default function StockSettingPage({ price, setPrice }) {
             </tbody>
           </table>
         </div>
-        <div class="group" id="n1_462">
-          <div class="left top rectangle" id="n1_447" onClick={goMainPage}>
-            <div class="left top text" id="n1_449">메인화면</div>
+        <div class="group" id="n2_462">
+          <div class="left top rectangle" id="n2_448" onClick={changeEnd}>
+            <div class="left top text" id="n2_450">수정완료</div>
           </div>
-          <div class="left top rectangle" id="n1_448" onClick={changeEnd}>
-            <div class="left top text" id="n1_450">수정완료</div>
+          <div class="left top rectangle" id="n2_447" onClick={goMainPage}>
+            <div class="left top text" id="n2_449">메인화면</div>
           </div>
         </div>
       </div>

@@ -1,18 +1,17 @@
-#n1_192 {
+#n3_192 {
 	width: 100%;
 	height: 100vh;
-	background-color: rgb(209, 228, 255);
+	background-color: #D5DFEF;
 }
 
 /* Rectangle 1 */
-#n1_194 {
+#n3_194 {
   background: rgb(255, 255, 255);
-  box-shadow: rgb(0, 105, 255) 0px 0px 0px 2px inset;
   width: 100%;
   height: 150px;
 }
 
-#n1_400 {
+#n3_400 {
   float: left;
   margin: 20px 29px 40px 0px;
   font-family: Roboto;
@@ -20,7 +19,7 @@
   height: 64px;
 }
 
-#n1_401 {
+#n3_401 {
   float: left;
   margin: 0px 5px 25px 10px;
   background-image: url("https://s3-alpha-sig.figma.com/img/a234/ca60/3346f1f33f6812890e12b5af1c601dc4?Expires=1638144000&Signature=K8oi9BrU~rBPX8AWyhHoFVvfZsHVmlx11ohkQGJngeRwIdkA9evUdB79sstLz-XjwBmJX3olCypPhCfWm55wuX4IGu4Ayzz-dJMj9GsjC33VviEW~rhyLS3eGTRp1sS0r3gtO1w9vE6B1J0-gPLjDKtetJVXF4IhVCELFw3JQJatJJgku45FzHfdv0WX35ItXxFhJ82GC3OALxC9Q~1glJgWvsG7Xxw4PhRa7j3KxeH0n1QQ1LT~IigZkGWyMF3acnzy3KeLjFl2hlLM1mmDZZIDyPfeJY9LIZAmeNMc8lrb1rFU5Drw-olFcB60GuJhWd-dSs~FMfagNzW~tVt2lg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
@@ -30,21 +29,21 @@
   height: 100px;
 }
 
-#n11_503 {
+#n31_503 {
   float: left;
   margin: 10px 0px 0px 10px;
   width: 404px;
   height: 750px;
 }
 
-#n11_504 {
+#n31_504 {
   float: left;
   margin: 10px 10px 0px 10px;
   width: 181px;
   height: 632px;
 }
 
-#n11_505 {
+#n31_505 {
   float: left;
   margin: 10px 10px 0px 10px;
   width: 181px;
@@ -52,160 +51,136 @@
 }
 
 /* Rectangle 11 */
-#n1_403 {
+#n3_403 {
   margin: 15px 0px 0px 15px;
   padding: 10px 0px 0px 0px;
   background: rgb(255, 255, 255);
   box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
   width: 150px;
   height: 70px;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 3px 3px 3px;
 }
 
 /* 1조 */
-#n1_410 {
-  margin: 0px 0px 0px 37px;
+#n3_410 {
+  margin: 7px 0px 0px 45px;
   font-family: Roboto;
-  font-size: 55px;
+  font-size: 40px;
   height: 64px;
 }
 
 /* Rectangle 14 */
-#n1_447 {
-  float: left;
-  margin: 0px 0px 0px 25px;
+#n3_447 {
+  float: right;
+  margin: 50px 25px 0px 25px;
   background: rgb(255, 255, 255);
-  box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
-  left: 1438px;
   width: 180px;
-  top: 993px;
   height: 60px;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 3px 3px 3px;
 }
 
 /* 메인화면 */
-#n1_449 {
-  margin: 10px 0px 0px 20px;
-  font-family: Roboto;
-  font-size: 40px;
-  font-weight: 400;
-  letter-spacing: 0px;
-  color: rgb(0, 0, 0);
+#n3_449 {
+  margin: 12px 0px 0px 32px;
+  font-size: 35px;
   vertical-align: middle;
   justify-content: flex-start;
-  width: 148px;
-  transform: translate(0px, 0px);
   line-height: 46.875px;
   height: 47px;
-  left: 1454px;
-  top: 999px;
 }
 
 
 /* Rectangle 15 */
-#n1_448 {
-  margin: 0px 0px 0px 50px;
-  float: left;
+#n3_448 {
+  margin: 50px 50px 0px 0px;
+  float: right;
   background: rgb(255, 255, 255);
-  box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
-  left: 1655px;
   width: 180px;
-  top: 993px;
   height: 60px;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 3px 3px 3px;
 }
 
 /* 수정완료 */
-#n1_450 {
-  margin: 10px 0px 0px 20px;
-  font-family: Roboto;
-  font-size: 40px;
-  font-weight: 400;
-  letter-spacing: 0px;
-  color: rgb(0, 0, 0);
+#n3_450 {
+  margin: 12px 0px 0px 32px;
+  font-size: 35px;
   vertical-align: middle;
   justify-content: flex-start;
-  width: 148px;
-  transform: translate(0px, 0px);
   line-height: 46.875px;
   height: 47px;
 }
 
-#n1_462 {
-  float: left;
+#n3_462 {
+  height: 60px;
+  width: 100%;
 }
 
-#n12_1 {
+#n32_1 {
   float: left;
   width: 100%;
   height: 770px;
 }
 
-#n1_100 {
+#n3_100 {
   float: left;
   margin: 10px 15px 0px 25px;
   padding: 10px 0px 0px 0px;
   background: rgb(255, 255, 255);
-  box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
-  left: 85px;
-  top: 271px;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 3px 3px 3px; 
   height: 70px;
 }
 
 /* 1조 */
-#n1_101 {
+#n3_101 {
   margin: 0px 0px 0px 60px;
-  font-family: Roboto;
   font-size: 55px;
   font-weight: 400;
-  letter-spacing: 0px;
-  color: rgb(0, 0, 0);
   vertical-align: middle;
   justify-content: flex-start;
   width: 82px;
-  transform: translate(0px, 0px);
   line-height: 64.4531px;
   height: 64px;
 }
 
-#n1_102 {
+#n3_102 {
   float: left;
   margin: 10px 0px 0px 35px;
   padding: 10px 0px 0px 0px;
   background: rgb(255, 255, 255);
-  box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
-  left: 85px;
-  width: 150px;
-  top: 271px;
   height: 70px;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 3px 3px 3px;
 }
 
-#n1_462 {
+#n3_462 {
   width: 100%;
   height: 100px;
 }
 
 /* 1조 */
-#n1_103 {
+#n3_103 {
   margin: 0px 0px 0px 60px;
-  font-family: Roboto;
   font-size: 55px;
   font-weight: 400;
-  letter-spacing: 0px;
-  color: rgb(0, 0, 0);
   vertical-align: middle;
   justify-content: flex-start;
   width: 82px;
-  transform: translate(0px, 0px);
   line-height: 64.4531px;
   height: 64px;
 }
 
-#n1_402 {
+#n3_402 {
   float: left;
   width: 100%;
   height: 100px;
 }
 
 	/* Rectangle 11 */
-  #n1_436 {
+  #n3_436 {
     background: rgb(255, 255, 255);
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
     left: 85px;
@@ -215,7 +190,7 @@
   }
 
   /* 5조 */
-  #n1_437 {
+  #n3_437 {
     font-family: Roboto;
     font-size: 55px;
     font-weight: 400;
@@ -233,7 +208,7 @@
 
 
   /* Rectangle 11 */
-  #n1_439 {
+  #n3_439 {
     background: rgb(255, 255, 255);
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
     left: 85px;
@@ -243,7 +218,7 @@
   }
 
   /* 6조 */
-  #n1_440 {
+  #n3_440 {
     font-family: Roboto;
     font-size: 55px;
     font-weight: 400;
@@ -261,7 +236,7 @@
 
 
   /* Rectangle 11 */
-  #n1_442 {
+  #n3_442 {
     background: rgb(255, 255, 255);
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
     left: 85px;
@@ -271,7 +246,7 @@
   }
 
   /* 7조 */
-  #n1_443 {
+  #n3_443 {
     font-family: Roboto;
     font-size: 55px;
     font-weight: 400;
@@ -289,7 +264,7 @@
 
 
   /* Rectangle 11 */
-  #n1_433 {
+  #n3_433 {
     background: rgb(255, 255, 255);
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
     left: 296px;
@@ -299,7 +274,7 @@
   }
 
   /* 8조 */
-  #n1_434 {
+  #n3_434 {
     font-family: Roboto;
     font-size: 55px;
     font-weight: 400;
@@ -317,7 +292,7 @@
 
 
   /* Rectangle 11 */
-  #n1_417 {
+  #n3_417 {
     background: rgb(255, 255, 255);
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
     left: 85px;
@@ -327,25 +302,21 @@
   }
 
   /* 3조 */
-  #n1_418 {
+  #n3_418 {
     font-family: Roboto;
     font-size: 55px;
     font-weight: 400;
-    letter-spacing: 0px;
-    color: rgb(0, 0, 0);
     vertical-align: middle;
     justify-content: flex-start;
     width: 82px;
     transform: translate(0px, 0px);
     line-height: 64.4531px;
     height: 64px;
-    left: 119px;
-    top: 456px;
   }
 
 
   /* Rectangle 11 */
-  #n1_420 {
+  #n3_420 {
     background: rgb(255, 255, 255);
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
     left: 85px;
@@ -355,25 +326,20 @@
   }
 
   /* 4조 */
-  #n1_421 {
+  #n3_421 {
     font-family: Roboto;
     font-size: 55px;
     font-weight: 400;
-    letter-spacing: 0px;
-    color: rgb(0, 0, 0);
     vertical-align: middle;
     justify-content: flex-start;
     width: 82px;
-    transform: translate(0px, 0px);
     line-height: 64.4531px;
     height: 64px;
-    left: 119px;
-    top: 547px;
   }
 
 
   /* Rectangle 11 */
-  #n1_423 {
+  #n3_423 {
     background: rgb(255, 255, 255);
     left: 205px;
     width: 150px;
@@ -382,7 +348,7 @@
   }
 
   /* Rectangle 12 */
-  #n1_425 {
+  #n3_425 {
     background: rgb(255, 255, 255);
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
     left: 205px;
@@ -392,25 +358,20 @@
   }
 
   /* + */
-  #n1_424 {
+  #n3_424 {
     font-family: Roboto;
     font-size: 55px;
     font-weight: 400;
-    letter-spacing: 0px;
-    color: rgb(0, 0, 0);
     vertical-align: middle;
     justify-content: flex-start;
     width: 32px;
-    transform: translate(0px, 0px);
     line-height: 64.4531px;
     height: 64px;
-    left: 264px;
-    top: 911px;
   }
 
 
   /* Rectangle 11 */
-  #n1_427 {
+  #n3_427 {
     background: rgb(255, 255, 255);
     left: 205px;
     width: 150px;
@@ -419,7 +380,7 @@
   }
 
   /* Rectangle 12 */
-  #n1_428 {
+  #n3_428 {
     background: rgb(255, 255, 255);
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
     left: 205px;
@@ -429,83 +390,65 @@
   }
 
   /* - */
-  #n1_429 {
+  #n3_429 {
     font-family: Roboto;
     font-size: 55px;
     font-weight: 400;
-    letter-spacing: 0px;
-    color: rgb(0, 0, 0);
     vertical-align: middle;
     justify-content: flex-start;
     width: 16px;
-    transform: translate(0px, 0px);
     line-height: 64.4531px;
     height: 64px;
-    left: 272px;
-    top: 1002px;
   }
 
 /* 수정박스 */
-#n1_431 {
-  margin: 10px 500px 0px 0px;
+#n3_431 {
+  margin: 10px 500px 0px 100px;
   float: left;
   background: rgb(255, 255, 255);
-  box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
-  left: 486px;
   width: 1350px;
-  top: 250px;
   height: 750px;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 3px 3px 3px; 
 }
 
 /* 1조 */
-#n1_445 {
+#n3_445 {
   float: left;
-  margin: 0px 150px 0px 10px;
+  margin: 0px 170px 0px 10px;
   font-family: Roboto;
-  font-size: 55px;
+  font-size: 45px;
 }
 
 /* 보유현금 */
-#n1_463 {
+#n3_463 {
   float: left;
-  font-family: Roboto;
-  font-size: 55px;
+  font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0px;
-  color: rgb(0, 0, 0);
   vertical-align: middle;
   justify-content: flex-start;
   width: 203px;
-  transform: translate(0px, 0px);
   line-height: 64.4531px;
   height: 64px;
-  left: 757px;
-  top: 271px;
 }
 
 /* 보유주식 */
-#n1_464 {
-  margin: 0px 0px 0px 170px;
+#n3_464 {
+  margin: 0px 0px 0px 180px;
   float: left;
-  font-family: Roboto;
-  font-size: 55px;
+  font-size: 45px;
   font-weight: 400;
-  letter-spacing: 0px;
-  color: rgb(0, 0, 0);
   vertical-align: middle;
   justify-content: flex-start;
   width: 203px;
-  transform: translate(0px, 0px);
   line-height: 64.4531px;
   height: 64px;
-  left: 1400px;
-  top: 271px;
 }
 
 
 
 /* Rectangle 14 */
-#n1_456 {
+#n3_456 {
   background: rgb(255, 255, 255);
   box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
   left: 1439px;
@@ -515,7 +458,7 @@
 }
 
 /* 메인화면 */
-#n1_457 {
+#n3_457 {
   font-family: Roboto;
   font-size: 40px;
   font-weight: 400;
@@ -531,16 +474,16 @@
   top: 1015px;
 }
 
-#n1_455 {
+#n3_455 {
   float: left;
 }
 
-#n1_458 {
+#n3_458 {
   float: left;
 }
 
 /* Rectangle 15 */
-#n1_459 {
+#n3_459 {
   background: rgb(255, 255, 255);
   box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
   left: 1656px;
@@ -550,7 +493,7 @@
 }
 
 /* 수정완료 */
-#n1_460 {
+#n3_460 {
   font-family: Roboto;
   font-size: 40px;
   font-weight: 400;
@@ -566,18 +509,18 @@
   top: 1015px;
 }
 
-#n1_461 {
+#n3_461 {
   width: 100%;
   height: 60px;
 }
 
-#n1_465 {
+#n3_465 {
   margin: 0px 0px 0px 60px;
   float: left;
 }
 
 /* 주식_생명 */
-#n1_466 {
+#n3_466 {
   background-image: url("https://s3-alpha-sig.figma.com/img/b5a2/c70e/4acf184f0d8b66e02fa216744ec80138?Expires=1638144000&Signature=HAzxSnzjZItI2A3qv2NUdmAYebUgRo2240hZcLcVpqekNcwzxABraZgRi9lsRWXZEUq2iRO-jWOwUpPdnXahA~tra34hKxt5GiBpRup8nn6fmfpoWMS7Ybci5N1hW0doLC9RdDjKN4gwna6aMg8yGaKem1b3j6ZbozCvMdhGjod0o7eTAN099qJgneDc76kW1tT3Y-7nzDMrTDncQjb8WITIJJ~Wl7J0K-rhRCXRxxeiZoArJ5xB9CUO-GrEjsmrr-t~L-oXC3BoHBaq5Oi8oPpOf6tux~QhilBX3xqw4yUPmfgbh-~IBP64XVYAjz40YEPA9j7ZcPBq5tGazy7vJg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
   background-size: cover;
   background-repeat: no-repeat;
@@ -589,7 +532,7 @@
 }
 
 /* 주식_방송 */
-#n1_467 {
+#n3_467 {
   background-image: url("https://s3-alpha-sig.figma.com/img/c396/c4c2/f9cce03fd37d8ab87141549642b76040?Expires=1638144000&Signature=TLzT3lilyQP9zZ7qBhLUOM6zfADBrVEd3ZuVSjoFS9G~lBoBKl8R8QqfEjU5OsKFdFzQJJehknbMx0JO2dOpTTH2c6zFGjfDn5hs8FPflt~AQ26sSnLh7aLT9dygS6mRC9hPoJdbKyr7YSq3~2hAaBlJqg6bVDURs3vo1apElHnpYWJbqWYat6ecy0EDJs1Z5rPUyl-vGFkrXBDQJ8s72M7RYXLCDGD3Gi5sD-9v1etoMu3N3Qvdnbl-j8jB3DXBPmmMFLoSDqlsetK5QRKS85KswDw8c1Z51lL4F-h777ac3nqthc7V8e3VwnwG2f149cI0tSR78~~1Bn1d2AAWVg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
   background-size: cover;
   background-repeat: no-repeat;
@@ -601,7 +544,7 @@
 }
 
 /* 주식_건설 */
-#n1_468 {
+#n3_468 {
   background-image: url("https://s3-alpha-sig.figma.com/img/155d/9f73/0dfb1accef40a2e00b8ad6db84156c83?Expires=1638144000&Signature=It3sfrPrLcwucAvnsefQis2zFh8knFtKoHwKch2KuOfDzv5l2rFy~tkGvkknUtNDr3GoN6qqeeitw0~4nLjIWiRV2sA0jd8Hs-fHqUcenc3DryfOh7xse0EkYz58H9wP4J3QlDPwN4bp~3kxgdxj-KATYp0HY9mVQJXCkGjl3Xq6o30zk7XDzTLdtMm7zz2aNGZ8A~W5PDBnKzRVB~da2LIr~mSoviI1DR08-1Olf8EUWSbtUTHHyINw2fnyaz2se~xiK~wS~b5Jf2X0W3b0~EclxazYxuBgprqz1URg7gJWBdC00CfRqDlyuiKhQl9ujVDDFXdEXAvB3I1kUXDa-w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
   background-size: cover;
   background-repeat: no-repeat;
@@ -613,7 +556,7 @@
 }
 
 /* 주식_전자 */
-#n1_469 {
+#n3_469 {
   background-image: url("https://s3-alpha-sig.figma.com/img/3071/be1a/922f8cf1bbcbbfb09fa397aa366de193?Expires=1638144000&Signature=hIRJHrA26eWdch7lNjCTWlm6~AK6FSYWeH8nxH0P6A~osvQcN8uxGvGRZVUvv28sFcqOhp8PkaT7b6ivIYLcD2XbyIcI4-1z-xfJC34tCwa~YBjhTzLWQk1BNZ-n5zn-LjRMhZdz0izb-XVuNAnTij-LB-7omD7BuiNhAB6Nfczr5t~hwTWtcwmQk0mNB0JK3UuXKdATqNv10F9L3N7hfAYKMGJ3yUJyzCUop-6Whjpo9wDMJq-jxQUrPcneDTc6dfvPxzLqaIDQvBZ8K~3qByLxGKtjKpm4UNQAaxj6KBAgX47vN7xuCaWTEQFQK1DucJoqscbpH3pSTtzLbqq85w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
   background-size: cover;
   background-repeat: no-repeat;
@@ -625,7 +568,7 @@
 }
 
 /* 주식_식품 */
-#n1_470 {
+#n3_470 {
   background-image: url("https://s3-alpha-sig.figma.com/img/d956/57a8/17f992625d5099033092939b4cce2925?Expires=1638144000&Signature=X6K7uGVR5esnlosatVB6hP7~DoRy2gq7xmeggnpLPMmeC1z2FIS~UFH~HJpzMdfNe-Ca5bZuMWidl9AC7yqMe-aubdmBtq9YJU1q2eLITNDFPdb-vMY3AWtfaFNrK8uhXaDxSg7DUUbrjzLMcKJgPH--AYBB~QYrBMq5Ynh2wyS2Ql7OaOqxOzc5Syxi1vVDBU9h8D-d8gMog9FWIKkcdPKQp4wSDHB5IkgDpIMdWf0ag65JEQmcYZGgdjIsiS6K7xdbEqmHe4OvF-GMm~ZDz-nPKhTpmvJmVnV~uvlASv04YGIqYQQj~xrTiwULYfuEJJejGwE9JlNF-kqcXNrPAQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
   background-size: cover;
   background-repeat: no-repeat;
@@ -636,13 +579,13 @@
   height: 100px;
 }
 
-#n1_476 {
+#n3_476 {
   padding: 20px 50px 0px 50px;
   float: left;
 }
 
 /* 생명 */
-#n1_477 {
+#n3_477 {
   font-family: Roboto;
   font-size: 40px;
   font-weight: 400;
@@ -659,7 +602,7 @@
 }
 
 /* 전자 */
-#n1_478 {
+#n3_478 {
   margin-top: 60px;
   font-family: Roboto;
   font-size: 40px;
@@ -677,7 +620,7 @@
 }
 
 /* 건축 */
-#n1_479 {
+#n3_479 {
   margin-top: 60px;
   font-family: Roboto;
   font-size: 40px;
@@ -695,7 +638,7 @@
 }
 
 /* 식품 */
-#n1_480 {
+#n3_480 {
   margin-top: 55px;
   font-family: Roboto;
   font-size: 40px;
@@ -713,7 +656,7 @@
 }
 
 /* 방송 */
-#n1_481 {
+#n3_481 {
   margin-top: 50px;
   font-family: Roboto;
   font-size: 40px;
@@ -732,7 +675,7 @@
 
 
 /* Rectangle 16 */
-#n1_483 {
+#n3_483 {
   background: rgb(255, 255, 255);
   box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
   left: 703px;
@@ -742,7 +685,7 @@
 }
 
 /* 100,000,000 */
-#n1_482 {
+#n3_482 {
   font-family: Roboto;
   font-size: 40px;
   font-weight: 400;
@@ -758,17 +701,17 @@
   top: 387px;
 }
 
-#n1_484 {
+#n3_484 {
   float: left;
 }
 
-#n1_485 {
+#n3_485 {
   float: left;
   height: 600px;
 }
 
 /* Rectangle 16 */
-#n1_486 {
+#n3_486 {
   margin-top: 5px;
   background: rgb(255, 255, 255);
   box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
@@ -779,7 +722,7 @@
 }
 
 /* 100,000,000 */
-#n1_487 {
+#n3_487 {
   font-family: Roboto;
   font-size: 40px;
   font-weight: 400;
@@ -796,7 +739,7 @@
 }
 
 /* Rectangle 16 */
-#n1_498 {
+#n3_498 {
   margin-top: 20px;
   background: rgb(255, 255, 255);
   box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
@@ -807,7 +750,7 @@
 }
 
 /* 100,000,000 */
-#n1_499 {
+#n3_499 {
   font-family: Roboto;
   font-size: 40px;
   font-weight: 400;
@@ -825,7 +768,7 @@
 
 
 /* Rectangle 16 */
-#n1_495 {
+#n3_495 {
   margin-top: 20px;
   background: rgb(255, 255, 255);
   box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
@@ -836,7 +779,7 @@
 }
 
 /* 100,000,000 */
-#n1_496 {
+#n3_496 {
   font-family: Roboto;
   font-size: 40px;
   font-weight: 400;
@@ -854,7 +797,7 @@
 
 
 /* Rectangle 16 */
-#n1_489 {
+#n3_489 {
   margin-top: 20px;
   background: rgb(255, 255, 255);
   box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
@@ -865,7 +808,7 @@
 }
 
 /* 100,000,000 */
-#n1_490 {
+#n3_490 {
   font-family: Roboto;
   font-size: 40px;
   font-weight: 400;
@@ -881,23 +824,26 @@
   top: 506px;
 }
 
-#n1_491 {
+#n3_491 {
   margin: 0px 0px 0px 240px;
   float: left;
 }
 
 /* Rectangle 16 */
-#n1_492 {
-  background: rgb(255, 255, 255);
-  box-shadow: rgb(0, 0, 0) 0px 0px 0px 2px inset;
-  left: 1462px;
+#n3_492 {
   width: 314px;
-  top: 620px;
   height: 85px;
+  border-radius: 30px 30px 30px 30px;
+  background: #D5DFEF;
+  box-shadow: 3px 3px 3px;
+}
+
+#tot {
+  margin: 27px 0px 0px 80px;
 }
 
 /* 100,000,000 */
-#n1_493 {
+#n3_493 {
   font-family: Roboto;
   font-size: 40px;
   font-weight: 400;
@@ -913,7 +859,7 @@
   top: 639px;
 }
 
-#n1_1 {
+#n3_1 {
   margin: 10px 0px 0px 0px;
   width: 100%;
   height: 80px;

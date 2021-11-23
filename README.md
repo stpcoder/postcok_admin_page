@@ -9,9 +9,8 @@ POSTOCK admin page
 ### npm i --save-dev npm-watch
 
 ### npm install -g server
-### npx serve -s build //서버 실행시키기
+### npx serve -s build
 ### npm run watch
 
-### git clone
 
 >>>>>>> ca20b5dc81a6ec1f86d1614d642ecdf7f0979031
