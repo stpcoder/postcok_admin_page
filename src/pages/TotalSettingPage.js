@@ -4,6 +4,9 @@ import './totalSettingPage.css';
 import totalLogo from './adminTotalLogo.png';
 import { useNavigate } from 'react-router';
 
+const defaultTime = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], 
+                    [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],];
 
 export default function TotalSettingPage() {
   const [sellMinute, setSellMinute] = useState(0);
@@ -13,8 +16,20 @@ export default function TotalSettingPage() {
   const [buyMinute, setBuyMinute] = useState(0);
   const [buySecond, setBuySecond] = useState(0);
   const [timerActive, setTimerActive] = useState(false);
+  const [sellStart, setSellStart] = useState(false);
+  const [solveStart, setSolveStart] = useState(false);
+  const [buyStart, setBuyStart] = useState(false);
   const [turn, setTurn] = useState(1);
   const [gameType, setGameType] = useState(1);
+
+  const timeUpdate = (turnNum) => {
+    setSellMinute(defaultTime[turnNum - 1][0]);
+    setSellSecond(defaultTime[turnNum - 1][1]);
+    setSolveMinute(defaultTime[turnNum - 1][2]);
+    setSolveSecond(defaultTime[turnNum - 1][3]);
+    setBuyMinute(defaultTime[turnNum - 1][4]);
+    setBuySecond(defaultTime[turnNum - 1][5]);
+  }
 
   const navigate = useNavigate();
   const goMainPage = () => {
@@ -23,28 +38,149 @@ export default function TotalSettingPage() {
   
   const startTimer = () => {
     if (!timerActive) setTimerActive(true);
-
   }
 
   const stopTimer = () => {
     if (timerActive) setTimerActive(false);
-
   }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const gameTemp = gameType === 1 ? 'sell' : gameType === 2 ? 'buy' : 'solve';
+    document.getElementsByClassName(gameTemp)[0].style.background = "#94A8D6";
+    document.getElementsByClassName('turn' + turn)[0].style.background = "#94A8D6";
+  }, []);
+
+  useEffect(() => {
+    const start = timerActive ? true : false;
+    switch(gameType) {
+      case 1:
+        setSellStart(start);
+        break;
+      case 2:
+        setSolveStart(start);
+        break;
+      case 3:
+        setBuyStart(start);
+        break;
+      default:
+        break;
+    }
+  }, [timerActive]);
+
+  useEffect(() => {
+    switch(gameType) {
+      case 1:
+        document.getElementsByClassName('buy')[0].style.background = "white";
+        document.getElementsByClassName('sell')[0].style.background = "#94A8D6";
+        setBuyStart(false);
+        break;
+
+      case 2:
+        document.getElementsByClassName('sell')[0].style.background = "white";
+        document.getElementsByClassName('solve')[0].style.background = "#94A8D6";
+        setSellStart(false);
+        setSolveStart(true);
+        break;
+
+      case 3:
+        document.getElementsByClassName('solve')[0].style.background = "white";
+        document.getElementsByClassName('buy')[0].style.background = "#94A8D6";
+        setSolveStart(false);
+        setBuyStart(true);
+        break;
+
+      default:
+        return;
+    }
+  }, [gameType]);
+
+  useEffect(() => {
+    if (sellStart) {
+      console.log('sell start');
+      const sellTimer = setInterval(() => {
+        if (sellSecond > 0) {
+          setSellSecond(sellSecond - 1);
+        } else if (sellSecond === 0) {
+          if (sellMinute === 0) {
+            clearInterval(sellTimer);
+            setGameType(2);
+          } else {
+            setSellMinute(sellMinute - 1);
+            setSellSecond(59);
+          }
+        }
+      }, 1000);
+      return () => clearInterval(sellTimer);
+    } else if (solveStart) {
+      console.log('solve start');
+      const solveTimer = setInterval(() => {
+        if (solveSecond > 0) {
+          setSolveSecond(solveSecond - 1);
+        } else if (solveSecond === 0) {
+          if (solveMinute === 0) {
+            clearInterval(solveTimer);
+            setGameType(3);
+          } else {
+            setSolveMinute(solveMinute - 1);
+            setSolveMinute(59);
+          }
+        }
+      }, 1000);
+      return () => clearInterval(solveTimer);
+    } else if (buyStart) {
+      console.log('buy start');
+      const buyTimer = setInterval(() => {
+        if (buySecond > 0) {
+          setBuySecond(buySecond - 1);
+        } else if (buySecond === 0) {
+          if (buyMinute === 0) {
+            clearInterval(buyTimer);
+            setGameType(1);
+            setTimerActive(false);
+            const nextTurn = turn === 9 ? 1 : turn + 1;
+            setTurn(nextTurn);
+            document.getElementsByClassName('turn' + turn)[0].style.background = "white";
+            document.getElementsByClassName('turn' + nextTurn)[0].style.background = "#94A8D6";
+          } else {
+            setBuyMinute(buyMinute - 1);
+            setBuySecond(59);
+          }
+        }
+      }, 1000);
+      return () => clearInterval(buyTimer);
+    }
+  }, [sellStart, solveStart, buyStart, sellSecond, sellMinute, solveSecond, solveMinute, buySecond, buyMinute]);
 
   const onChangeTimer = (e) => {
     if (timerActive) return;
     switch ((Number(e.target.id) - Number(e.target.id) % 10)/10) {
       case 1 : 
         (Number(e.target.id) % 10) === 1 ? setSellMinute(Number(e.target.value)) : setSellSecond(Number(e.target.value));
+        if ((Number(e.target.id) % 10) === 1) {
+          defaultTime[turn - 1][0] = Number(e.target.id);
+        } else {
+          defaultTime[turn - 1][1] = Number(e.target.id);
+        }
         break;
+
       case 2 : 
         (Number(e.target.id) % 10) === 1 ? setSolveMinute(Number(e.target.value)) : setSolveSecond(Number(e.target.value));
+        if ((Number(e.target.id) % 10) === 1) {
+          defaultTime[turn - 1][2] = Number(e.target.id);
+        } else {
+          defaultTime[turn - 1][3] = Number(e.target.id);
+        }
         break;
+
       case 3 : 
         (Number(e.target.id) % 10) === 1 ? setBuyMinute(Number(e.target.value)) : setBuySecond(Number(e.target.value));
+        if ((Number(e.target.id) % 10) === 1) {
+          defaultTime[turn - 1][4] = Number(e.target.id);
+        } else {
+          defaultTime[turn - 1][5] = Number(e.target.id);
+        }
         break;
+
       default :
         return;
     }
@@ -75,12 +211,12 @@ export default function TotalSettingPage() {
         <div id="n5_300">
           <div id="n5_304">
             <div id="n5_301">
-              <div id="n5_305">
+              <div class="sell" id="n5_305">
                 <div id="n5_306">판매</div>
               </div>
               <div id="n5_307">
                 {!timerActive ?
-                  <input class="test" id="11" value={sellMinute} onChange={onChangeTimer}></input> :
+                  <input class="test" id="11" value={sellMinute} onChange={onChangeTimer} type="number"></input> :
                   <div id="n5_308">{sellMinute}</div> }
               </div>
               <div id="n5_309">
@@ -88,7 +224,7 @@ export default function TotalSettingPage() {
               </div>
               <div id="n5_307">
                 {!timerActive ? 
-                  <input class="test" id="12" value={sellSecond} onChange={onChangeTimer}></input> :
+                  <input class="test" id="12" value={sellSecond} onChange={onChangeTimer} type="number"></input> :
                   <div id="n5_308">{sellSecond}</div> }
               </div>
               <div id="n5_309">
@@ -96,12 +232,12 @@ export default function TotalSettingPage() {
               </div>
             </div>
             <div id="n5_302"> 
-              <div id="n5_305">
+              <div class="solve" id="n5_305">
                 <div id="n5_306">문제풀이</div>
               </div>
               <div id="n5_307">
                 {!timerActive ?
-                  <input class="test" id="21" value={solveMinute} onChange={onChangeTimer}></input> :
+                  <input class="test" id="21" value={solveMinute} onChange={onChangeTimer} type="number"></input> :
                   <div id="n5_308">{solveMinute}</div> }
               </div>
               <div id="n5_309">
@@ -109,7 +245,7 @@ export default function TotalSettingPage() {
               </div>
               <div id="n5_307">
                 {!timerActive ?
-                  <input class="test" id="22" value={solveSecond} onChange={onChangeTimer}></input> :
+                  <input class="test" id="22" value={solveSecond} onChange={onChangeTimer} type="number"></input> :
                   <div id="n5_308">{solveSecond}</div> }
               </div>
               <div id="n5_309">
@@ -117,12 +253,12 @@ export default function TotalSettingPage() {
               </div>
             </div>
             <div id="n5_303">
-              <div id="n5_305">
+              <div class="buy" id="n5_305">
                 <div id="n5_306">구매</div>
               </div>
               <div id="n5_307">
                 {!timerActive ?
-                  <input class="test" id="31" value={buyMinute} onChange={onChangeTimer}></input> :
+                  <input class="test" id="31" value={buyMinute} onChange={onChangeTimer} type="number"></input> :
                   <div id="n5_308">{buyMinute}</div> }
               </div>
               <div id="n5_309">
@@ -130,7 +266,7 @@ export default function TotalSettingPage() {
               </div>
               <div id="n5_307">
                 {!timerActive ?
-                  <input class="test" id="32" value={buySecond} onChange={onChangeTimer}></input> :
+                  <input class="test" id="32" value={buySecond} onChange={onChangeTimer} type="number"></input> :
                   <div id="n5_308">{buySecond}</div> }
               </div>
               <div id="n5_309">

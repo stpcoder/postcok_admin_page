@@ -11,9 +11,28 @@ import broadLogo from './broadLogo.png';
 
 const stockTypeArr = ['bio', 'construction', 'electronics', 'food', 'broadcast', 'tot'];
 const buttonList = {1:true, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8:false, 9:false, 10:false, 11:false, 12:false};
+const groupStock = {'group1': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
+                    'group2': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
+                    'group3': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
+                    'group4': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
+                    'group5': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
+                    'group6': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
+                    'group7': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
+                    'group8': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
+                    'group9': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
+                    'group10': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
+                    'group11': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
+                    'group12': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0}
+                    };
 
 export default function UserInfoSettingPage({ groupNumber, setGroupNumber, groupInfo, setGroupInfo }) {
-  var groupStock = groupInfo;
+  for (var i = 1; i <= 12; i++) {
+    const text = 'group' + i;
+    stockTypeArr.forEach((stockType) => {
+      groupStock[text][stockType] = groupInfo[text][stockType];
+    });
+  }
+
   const [selectedGroup, setSelectedGroup] = useState(1);
   const [groupNum, setGroupNum] = useState(groupNumber);
   const [groupStockList, setGroupStockList] = useState(groupStock);
@@ -30,6 +49,7 @@ export default function UserInfoSettingPage({ groupNumber, setGroupNumber, group
       const inputTag = document.getElementById(typeName);
       inputTag.value = groupStockList['group1'][typeName];
     });
+    console.log(buttonList);
   },[]);
 
   const navigate = useNavigate();
@@ -43,7 +63,6 @@ export default function UserInfoSettingPage({ groupNumber, setGroupNumber, group
     setSelectedGroup(1);
     document.getElementsByClassName(selectedGroup)[0].style.background = 'white';
     document.getElementsByClassName(1)[0].style.background = '#94A8D6';
-    groupStock = groupInfo;
     setGroupStockList(groupInfo);
     for(var i = 1; i <= 12; i++) {
       buttonList[i] = (i <= groupNumber) ? true : false;
@@ -82,8 +101,6 @@ export default function UserInfoSettingPage({ groupNumber, setGroupNumber, group
     setGroupNum(num);
     buttonList[num] = true;
     setButtonShowList(buttonList);
-
-    const tempText = 'group' + num;
   }
 
   const minusGroupNum = e => {

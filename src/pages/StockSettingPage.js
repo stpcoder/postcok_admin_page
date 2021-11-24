@@ -11,9 +11,19 @@ import stockLogo from './adminStockChangeLogo.png';
 
 const stockTypeArr = ['bio', 'construction', 'electronics', 'food', 'broadcast'];
 const turnTypeArr = ['tot', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const stockPrice = {"bio":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0},
+                  "construction":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0},
+                  "electronics":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0},
+                  "food":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0},
+                  "broadcast":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0}
+                  }
 
 export default function StockSettingPage({ price, setPrice }) {
-  const stockPrice = price;
+  stockTypeArr.forEach((stockType) => {
+    turnTypeArr.forEach((turnType) => {
+      stockPrice[stockType][turnType] = price[stockType][turnType];
+    });
+  });
   const [priceList, setPriceList] = useState(stockPrice);
 
   const navigate = useNavigate();
@@ -25,11 +35,11 @@ export default function StockSettingPage({ price, setPrice }) {
     const temp = document.getElementsByTagName('input')
     const tempList = Array.prototype.slice.call(temp);
     tempList.forEach(e => {
-      const stockType = (Number(e.id) - Number(e.id)%10)/10;
-      const turn = Number(e.id)%10;
+      const stockType = (Number(e.id) - Number(e.id) % 10) / 10;
+      const turn = Number(e.id) % 10;
       e.value = price[stockTypeArr[stockType - 1]][turnTypeArr[turn]];
     });
-  }, [])
+  }, []);
 
   const changeEnd = () => {
     setPrice(stockPrice);
@@ -38,13 +48,12 @@ export default function StockSettingPage({ price, setPrice }) {
   }
 
   const onChangeValue = e => {
-    const stockType = (Number(e.target.id) - Number(e.target.id)%10)/10;
-    const turn = Number(e.target.id)%10;
+    const stockType = (Number(e.target.id) - Number(e.target.id) % 10) / 10;
+    const turn = Number(e.target.id) % 10;
     const value = Number(e.target.value);
 
     stockPrice[stockTypeArr[stockType - 1]][turnTypeArr[turn]] = value;
     setPriceList(stockPrice);
-    console.log(priceList);
   }
 
   return (

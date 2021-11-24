@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import StockSettingPage from './pages/StockSettingPage';
@@ -27,7 +27,6 @@ const groupInfoList = {'group1': {'tot':0, 'bio':0, 'construction':0, 'electroni
                     'group12': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0}
                     };
 
-
 function App() {
   const [price, setPrice] = useState(stockPrice);
   const [groupNumber, setGroupNumber] = useState(1);
@@ -39,7 +38,7 @@ function App() {
         <Route path = '/' exact element = {<MainPage/>} />
         <Route path = '/stockSetting' exact element = {<StockSettingPage price={price} setPrice={setPrice}/>} />
         <Route path = '/userInfo' exact element = {<UserInfoSettingPage groupNumber={groupNumber} setGroupNumber={setGroupNumber} groupInfo={groupInfo} setGroupInfo={setGroupInfo}/>} />
-        <Route path = '/currentState' exact element = {<CurrentStatePage/>}/>
+        <Route path = '/currentState' exact element = {<CurrentStatePage groupNumber={groupNumber}/>}/>
         <Route path = '/totalSetting' exact element = {<TotalSettingPage/>}/>
       </Routes>
     </div>
