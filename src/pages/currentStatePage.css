@@ -1,13 +1,75 @@
-#n4_192 {
-	width: 100%;
-	height: 100vh;
-	background-color: rgb(209, 228, 255);
+#n4_190 {
+  background: white;
+  width: 100%;
+  height: 100px;
 }
 
-/* Rectangle 1 */
-#n4_194 {
-  background: rgb(255, 255, 255);
-  box-shadow: rgb(0, 105, 255) 0px 0px 0px 2px inset;
+#n4_192 {
+	width: 100%;
+	height: 1000px;
+	background-color: #D5DFEF;
+}
+
+#n4_193 {
+  width: auto;
+  height: auto;
+}
+
+#n4_400 {
+  margin: 13px 29px 0px 0px;
+  float: left;
+  font-size: 45px;
+}
+
+#n4_401 {
+  float: left;
+  margin: 0px 5px 25px 10px;
+  width: 75px;
+  height: 75px;
+}
+
+#n4_402 {
+  margin: 10px 0px 0px 0px;
   width: 100%;
-  height: 150px;
+  height: 100px;
+}
+
+#n4_403 {
+  padding: 25px 0px 0px 0px;
+  margin-bottom: 40px;
+  width: 100%;
+  height: 650px;
+}
+
+#n4_404 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1300px;
+  height: 650px;
+  border-radius: 35px 35px 35px 35px;
+  box-shadow: 3px 3px 3px;
+  background-color: white;
+}
+
+#n4_447 {
+  float: right;
+  margin: 0px 25px 0px 25px;
+  background: rgb(255, 255, 255);
+  width: 180px;
+  height: 50px;
+  border-radius: 10px 15px 15px 15px;
+  box-shadow: 3px 3px 3px;
+}
+
+#n4_449 {
+  margin: 9px 0px 0px 38px;
+  font-size: 30px;
+  vertical-align: middle;
+  justify-content: flex-start;
+}
+
+#n4_462 {
+  height: 60px;
+  width: 100%;
+  margin: 10px 0px 0px 0px;
 }

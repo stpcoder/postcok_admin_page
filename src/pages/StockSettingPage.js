@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react'
 import './stockSettingPage.css'
 import mainLogo from './PoStocklogo.png';
 import { useNavigate } from 'react-router';
+import bioLogo from './bioLogo.png';
+import elecLogo from './elecLogo.png';
+import conLogo from './conLogo.png';
+import foodLogo from './foodLogo.png';
+import broadLogo from './broadLogo.png';
+import stockLogo from './adminStockChangeLogo.png';
 
 const stockTypeArr = ['bio', 'construction', 'electronics', 'food', 'broadcast'];
 const turnTypeArr = ['tot', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -45,13 +51,13 @@ export default function StockSettingPage({ price, setPrice }) {
     <div>
       <div class="frame" id="n2_192">
         <div class="topbar" id="n2_193">
-          <div class="topbar-background" id="n2_194">
-            <img src={mainLogo} id="n2_195" alt="logo"/>
+          <div id="n2_190">
+            <img src={mainLogo} id="n2_195" alt="mainlogo"/>
           </div>
         </div>
         <div id="n2">
-          <div class="left top rectangle" id="n2_175"></div>
-          <div class="left top text" id="n2_174">주식 정보 수정</div>
+          <img src={stockLogo} id="n2_175" alt="stockLogo"/>
+          <div id="n2_174">주식 정보 수정</div>
         </div>
         <div id="n2_2">
           <table class="tg">
@@ -65,7 +71,9 @@ export default function StockSettingPage({ price, setPrice }) {
             </thead>
             <tbody>
               <tr>
-                <td class="tg-c3ow"><div id="n2_11"></div></td>
+                <td class="tg-c3ow">
+                  <img src={bioLogo} id="n2_9" alt="bioLogo"/>
+                </td>
                 <td class="tg-c3ow">생명</td>
                 <td class="tg-c3ow">
                   <input id="10" onChange={onChangeValue}/>
@@ -99,7 +107,9 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
               </tr>
               <tr>
-                <td class="tg-c3ow"><div id="n2_13"></div></td>
+                <td class="tg-c3ow">
+                  <img src={elecLogo} id="n2_9" alt="elecLogo"/>
+                </td>
                 <td class="tg-c3ow">전자</td>
                 <td class="tg-c3ow">
                   <input id="20" onChange={onChangeValue}/>
@@ -133,7 +143,9 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
               </tr>
               <tr>
-                <td class="tg-c3ow"><div id="n2_9"></div></td>
+                <td class="tg-c3ow">
+                  <img src={conLogo} id="n2_9" alt="conLogo"/>
+                </td>
                 <td class="tg-c3ow">건축</td>
                 <td class="tg-c3ow">
                   <input id="30" onChange={onChangeValue}/>
@@ -167,7 +179,9 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
               </tr>
               <tr>
-                <td class="tg-c3ow"><div id="n2_12"></div></td>
+                <td class="tg-c3ow">
+                  <img src={foodLogo} id="n2_9" alt="foodLogo"/>
+                </td>
                 <td class="tg-c3ow">식품</td>
                 <td class="tg-c3ow">
                   <input id="40" onChange={onChangeValue}/>
@@ -201,7 +215,9 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
               </tr>
               <tr>
-                <td class="tg-c3ow"><div id="n2_10"></div></td>
+                <td class="tg-c3ow">
+                  <img src={broadLogo} id="n2_9" alt="broadLogo"/>
+                </td>
                 <td class="tg-c3ow">방송</td>
                 <td class="tg-c3ow">
                   <input id="50" onChange={onChangeValue}/>
@@ -237,12 +253,12 @@ export default function StockSettingPage({ price, setPrice }) {
             </tbody>
           </table>
         </div>
-        <div class="group" id="n2_462">
-          <div class="left top rectangle" id="n2_448" onClick={changeEnd}>
-            <div class="left top text" id="n2_450">수정완료</div>
+        <div id="n2_462">
+          <div id="n2_448" onClick={changeEnd}>
+            <div id="n2_450">수정완료</div>
           </div>
-          <div class="left top rectangle" id="n2_447" onClick={goMainPage}>
-            <div class="left top text" id="n2_449">메인화면</div>
+          <div id="n2_447" onClick={goMainPage}>
+            <div id="n2_449">메인화면</div>
           </div>
         </div>
       </div>
