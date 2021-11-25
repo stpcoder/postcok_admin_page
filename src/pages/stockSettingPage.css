@@ -6,7 +6,7 @@
 
 #n2_192 {
 	width: 100%;
-	height: 1000px;
+	height: 1100px;
 	background-color: #D5DFEF;
 }
 
@@ -44,8 +44,9 @@
 }
 
 .tg  {
-  margin-left:auto;
-  margin-right:auto;
+  margin-top: 50px;
+  margin-left : auto;
+  margin-right : auto;
   background-color: white;
   border-collapse:collapse;
 }
@@ -120,11 +121,11 @@
   padding: 20px 20px 20px 20px;
 }
 
-input {
+.stockInput {
   margin: 0px 5px 0px 5px;
   width: 100px;
 }
 
-input:focus {
+.stockInput:focus {
   background: aliceblue;
 }

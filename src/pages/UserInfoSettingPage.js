@@ -49,8 +49,7 @@ export default function UserInfoSettingPage({ groupNumber, setGroupNumber, group
       const inputTag = document.getElementById(typeName);
       inputTag.value = groupStockList['group1'][typeName];
     });
-    console.log(buttonList);
-  },[]);
+  }, []);
 
   const navigate = useNavigate();
   const goMainPage = () => {
@@ -221,7 +220,7 @@ export default function UserInfoSettingPage({ groupNumber, setGroupNumber, group
             </div>
             <div id="n3_491">
               <div id="n3_492">
-                <input id="tot" onChange={onChangeValue}/>
+                <input id="tot" class="userInput" onChange={onChangeValue}/>
               </div>
             </div>
             <div id="n3_465">
@@ -240,19 +239,19 @@ export default function UserInfoSettingPage({ groupNumber, setGroupNumber, group
             </div>
             <div id="n3_485">
               <div id="n3_492">
-                <input id="bio" onChange={onChangeValue}/>
+                <input id="bio" class="userInput" onChange={onChangeValue}/>
               </div>
               <div id="n3_493">
-                <input id="electronics" onChange={onChangeValue}/>
+                <input id="electronics" class="userInput" onChange={onChangeValue}/>
               </div>
               <div id="n3_493">
-                <input id="construction" onChange={onChangeValue}/>
+                <input id="construction" class="userInput" onChange={onChangeValue}/>
               </div>
               <div id="n3_493">
-                <input id="food" onChange={onChangeValue}/>
+                <input id="food" class="userInput" onChange={onChangeValue}/>
               </div>
               <div id="n3_493">
-                <input id="broadcast" onChange={onChangeValue}/>
+                <input id="broadcast" class="userInput" onChange={onChangeValue}/>
               </div>
             </div>
           </div>

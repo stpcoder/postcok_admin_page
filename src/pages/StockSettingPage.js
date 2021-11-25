@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './stockSettingPage.css'
 import mainLogo from './PoStocklogo.png';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 import bioLogo from './bioLogo.png';
 import elecLogo from './elecLogo.png';
 import conLogo from './conLogo.png';
@@ -17,6 +18,9 @@ const stockPrice = {"bio":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7
                   "food":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0},
                   "broadcast":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0}
                   }
+const defalutStockApi = {"price": [1, 2, 3, 4, 5, 6, 7, 8, 9], "count": 10}
+const apiServer = 'http://18.221.173.188:8080/stocks/bio';
+
 
 export default function StockSettingPage({ price, setPrice }) {
   stockTypeArr.forEach((stockType) => {
@@ -35,6 +39,7 @@ export default function StockSettingPage({ price, setPrice }) {
     const temp = document.getElementsByTagName('input')
     const tempList = Array.prototype.slice.call(temp);
     tempList.forEach(e => {
+      e.type = "number";
       const stockType = (Number(e.id) - Number(e.id) % 10) / 10;
       const turn = Number(e.id) % 10;
       e.value = price[stockTypeArr[stockType - 1]][turnTypeArr[turn]];
@@ -43,7 +48,11 @@ export default function StockSettingPage({ price, setPrice }) {
 
   const changeEnd = () => {
     setPrice(stockPrice);
-    alert('수정이 완료되었습니다.');
+    const test = async () => {
+      const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+      alert('data test : ' + response.data);
+    }
+    test();
     navigate('/');
   }
 
@@ -85,34 +94,34 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
                 <td class="tg-c3ow">생명</td>
                 <td class="tg-c3ow">
-                  <input id="10" onChange={onChangeValue}/>
+                  <input id="10" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="11" onChange={onChangeValue}/>
+                  <input id="11" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="12" onChange={onChangeValue}/>
+                  <input id="12" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="13" onChange={onChangeValue}/>
+                  <input id="13" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="14" onChange={onChangeValue}/>
+                  <input id="14" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="15" onChange={onChangeValue}/>
+                  <input id="15" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="16" onChange={onChangeValue}/>
+                  <input id="16" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="17" onChange={onChangeValue}/>
+                  <input id="17" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="18" onChange={onChangeValue}/>
+                  <input id="18" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="19" onChange={onChangeValue}/>
+                  <input id="19" class="stockInput" onChange={onChangeValue}/>
                 </td>
               </tr>
               <tr>
@@ -121,34 +130,34 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
                 <td class="tg-c3ow">전자</td>
                 <td class="tg-c3ow">
-                  <input id="20" onChange={onChangeValue}/>
+                  <input id="20" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="21" onChange={onChangeValue}/>
+                  <input id="21" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="22" onChange={onChangeValue}/>
+                  <input id="22" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="23" onChange={onChangeValue}/>
+                  <input id="23" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="24" onChange={onChangeValue}/>
+                  <input id="24" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="25" onChange={onChangeValue}/>
+                  <input id="25" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="26" onChange={onChangeValue}/>
+                  <input id="26" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="27" onChange={onChangeValue}/>
+                  <input id="27" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="28" onChange={onChangeValue}/>
+                  <input id="28" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="29" onChange={onChangeValue}/>
+                  <input id="29" class="stockInput" onChange={onChangeValue}/>
                 </td>
               </tr>
               <tr>
@@ -157,34 +166,34 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
                 <td class="tg-c3ow">건축</td>
                 <td class="tg-c3ow">
-                  <input id="30" onChange={onChangeValue}/>
+                  <input id="30" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="31" onChange={onChangeValue}/>
+                  <input id="31" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="32" onChange={onChangeValue}/>
+                  <input id="32" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="33" onChange={onChangeValue}/>
+                  <input id="33" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="34" onChange={onChangeValue}/>
+                  <input id="34" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="35" onChange={onChangeValue}/>
+                  <input id="35" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="36" onChange={onChangeValue}/>
+                  <input id="36" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="37" onChange={onChangeValue}/>
+                  <input id="37" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="38" onChange={onChangeValue}/>
+                  <input id="38" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="39" onChange={onChangeValue}/>
+                  <input id="39" class="stockInput" onChange={onChangeValue}/>
                 </td>
               </tr>
               <tr>
@@ -193,34 +202,34 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
                 <td class="tg-c3ow">식품</td>
                 <td class="tg-c3ow">
-                  <input id="40" onChange={onChangeValue}/>
+                  <input id="40" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="41" onChange={onChangeValue}/>
+                  <input id="41" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="42" onChange={onChangeValue}/>
+                  <input id="42" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="43" onChange={onChangeValue}/>
+                  <input id="43" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="44" onChange={onChangeValue}/>
+                  <input id="44" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="45" onChange={onChangeValue}/>
+                  <input id="45" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="46" onChange={onChangeValue}/>
+                  <input id="46" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="47" onChange={onChangeValue}/>
+                  <input id="47" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="48" onChange={onChangeValue}/>
+                  <input id="48" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="49" onChange={onChangeValue}/>
+                  <input id="49" class="stockInput" onChange={onChangeValue}/>
                 </td>
               </tr>
               <tr>
@@ -229,34 +238,34 @@ export default function StockSettingPage({ price, setPrice }) {
                 </td>
                 <td class="tg-c3ow">방송</td>
                 <td class="tg-c3ow">
-                  <input id="50" onChange={onChangeValue}/>
+                  <input id="50" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="51" onChange={onChangeValue}/>
+                  <input id="51" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="52" onChange={onChangeValue}/>
+                  <input id="52" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="53" onChange={onChangeValue}/>
+                  <input id="53" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="54" onChange={onChangeValue}/>
+                  <input id="54" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="55" onChange={onChangeValue}/>
+                  <input id="55" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="56" onChange={onChangeValue}/>
+                  <input id="56" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="57" onChange={onChangeValue}/>
+                  <input id="57" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="58" onChange={onChangeValue}/>
+                  <input id="58" class="stockInput" onChange={onChangeValue}/>
                 </td>
                 <td class="tg-c3ow">
-                  <input id="59" onChange={onChangeValue}/>
+                  <input id="59" class="stockInput" onChange={onChangeValue}/>
                 </td>
               </tr>
             </tbody>

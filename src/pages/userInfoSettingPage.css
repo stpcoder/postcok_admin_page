@@ -6,7 +6,7 @@
 
 #n3_192 {
 	width: 100%;
-	height: 1000px;
+	height: 1100px;
 	background-color: #D5DFEF;
 }
 
@@ -243,26 +243,12 @@
   margin: 10px 0px 0px 0px;
 }
 
-#bio {
+.userInput {
   margin: 15px 0px 0px 45px;
+  font-size: 130%;
+  width: 100px;
 }
 
-#electronics {
-  margin: 15px 0px 0px 45px;
-}
-
-#construction {
-  margin: 15px 0px 0px 45px;
-}
-
-#food {
-  margin: 15px 0px 0px 45px;
-}
-
-#broadcast {
-  margin: 20px 0px 0px 45px;
-}
-
-#tot {
-  margin: 20px 0px 0px 45px;
+.userInput:focus {
+  background: aliceblue;
 }

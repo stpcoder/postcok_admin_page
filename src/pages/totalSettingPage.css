@@ -11,7 +11,7 @@
 
 #n5_192 {
 	width: 100%;
-	height: 1000px;
+	height: 1100px;
 	background-color: #D5DFEF;
 }
 
@@ -57,15 +57,16 @@
 }
 
 #n5_304 {
-  float: left;
-  margin-left: 30px;
+  margin-left: auto;
+  margin-right: auto;
   height: 100px;
   width: 1330px;
 }
 
 #n5_300 {
   width: 100%;
-  height: 100px;
+  height: 130px;
+  margin-top: 30px;
 }
 
 #n5_301 {
@@ -154,7 +155,7 @@
 }
 
 #n5_403 {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   width: 100%;
   height: 550px;
 }
@@ -196,7 +197,6 @@
 }
 
 #n5_406 {
-  margin-top: 10px;
   width: 1250px;
   height: 550px;
   margin-right: auto;
@@ -227,6 +227,11 @@
 }
 
 .test {
-  height: 50px;
+  margin: 16px 0px 0px 5px;
   width: 40px;
+  font-size: 150%;
+}
+
+.test:focus {
+  background: aliceblue;
 }
