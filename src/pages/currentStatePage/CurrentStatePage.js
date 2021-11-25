@@ -1,7 +1,6 @@
 import React from 'react'
-import mainLogo from './PoStocklogo.png';
 import './currentStatePage.css';
-import currentLogo from './adminCurrentLogo.png';
+import { logos } from 'utils/GetLogo';
 import { useNavigate } from 'react-router';
 
 export default function CurrentStatePage({ groupNumber }) {
@@ -10,17 +9,16 @@ export default function CurrentStatePage({ groupNumber }) {
     navigate('/');
   }
 
-
   return (
     <div>
       <div class="frame" id="n4_192">
         <div class="topbar" id="n4_193">
           <div id="n4_190">
-            <img src={mainLogo} id="n4_195" alt="mainlogo"/>
+            <img src={logos.mainLogo} id="n4_195" alt="mainlogo"/>
           </div>
         </div>
         <div class="group" id="n4_402">
-          <img src={currentLogo} id="n4_401" alt="userLogo"/>
+          <img src={logos.currentLogo} id="n4_401" alt="userLogo"/>
           <div id="n3_400">현재 상황</div>
         </div>
         <div id="n4_403">

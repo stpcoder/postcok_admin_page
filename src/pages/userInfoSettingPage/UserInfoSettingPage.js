@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import mainLogo from './PoStocklogo.png';
 import './userInfoSettingPage.css';
 import { useNavigate } from 'react-router';
-import userLogo from './adminUserChangeLogo.png';
-import bioLogo from './bioLogo.png';
-import elecLogo from './elecLogo.png';
-import conLogo from './conLogo.png';
-import foodLogo from './foodLogo.png';
-import broadLogo from './broadLogo.png';
+import { logos } from 'utils/GetLogo';
 
 const stockTypeArr = ['bio', 'construction', 'electronics', 'food', 'broadcast', 'tot'];
 const buttonList = {1:true, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8:false, 9:false, 10:false, 11:false, 12:false};
@@ -132,11 +126,11 @@ export default function UserInfoSettingPage({ groupNumber, setGroupNumber, group
       <div class="frame" id="n3_192">
         <div class="topbar" id="n3_193">
           <div id="n3_190">
-            <img src={mainLogo} id="n3_195" alt="mainlogo"/>
+            <img src={logos.mainLogo} id="n3_195" alt="mainlogo"/>
           </div>
         </div>
         <div class="group" id="n3_402">
-          <img src={userLogo} id="n3_401" alt="userLogo"/>
+          <img src={logos.userLogo} id="n3_401" alt="userLogo"/>
           <div id="n3_400">참가자 정보 수정</div>
         </div>
 
@@ -224,11 +218,11 @@ export default function UserInfoSettingPage({ groupNumber, setGroupNumber, group
               </div>
             </div>
             <div id="n3_465">
-              <img src={bioLogo} id="n3_466" alt="bioLogo"/>
-              <img src={broadLogo} id="n3_467" alt="bioLogo"/>
-              <img src={conLogo} id="n3_467" alt="bioLogo"/>
-              <img src={elecLogo} id="n3_467" alt="bioLogo"/>
-              <img src={foodLogo} id="n3_467" alt="bioLogo"/>
+              <img src={logos.bioLogo} id="n3_466" alt="bioLogo"/>
+              <img src={logos.broadLogo} id="n3_467" alt="bioLogo"/>
+              <img src={logos.conLogo} id="n3_467" alt="bioLogo"/>
+              <img src={logos.elecLogo} id="n3_467" alt="bioLogo"/>
+              <img src={logos.foodLogo} id="n3_467" alt="bioLogo"/>
             </div>
             <div id="n3_476">
               <div id="n3_477">생명</div>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import mainLogo from './PoStocklogo.png';
 import './totalSettingPage.css';
-import totalLogo from './adminTotalLogo.png';
+import { logos } from 'utils/GetLogo';
 import { useNavigate } from 'react-router';
 
 const defaultTime = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], 
@@ -191,12 +190,12 @@ export default function TotalSettingPage() {
       <div class="frame" id="n5_192">
         <div class="topbar" id="n5_193">
           <div id="n5_190">
-            <img src={mainLogo} id="n5_195" alt="mainlogo"/>
+            <img src={logos.mainLogo} id="n5_195" alt="mainlogo"/>
           </div>
         </div>
         <div id="n5_191">
           <div class="group" id="n5_402">
-            <img src={totalLogo} id="n5_401" alt="userLogo"/>
+            <img src={logos.totalLogo} id="n5_401" alt="userLogo"/>
             <div id="n3_400">전체 설정</div>
           </div>
           <div id="n5_196">
