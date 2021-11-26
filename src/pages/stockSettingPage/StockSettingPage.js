@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router';
 import { logos } from 'utils/GetLogo';
 import { stockTypeArr, turnTypeArr } from 'utils/GetConstant';
 import OneRow from 'pages/stockSettingPage/stockSettingUtils';
+import axios from 'axios';
 
-const stockPrice = {"bio":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0},
-                  "construction":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0},
-                  "electronics":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0},
-                  "food":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0},
-                  "broadcast":{"tot":0, "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0}
+const stockPrice = {"bio":{"count":0, "price1":0, "price2":0, "price3":0, "price4":0, "price5":0, "price6":0, "price7":0, "price8":0, "price9":0},
+                  "construction":{"count":0, "price1":0, "price2":0, "price3":0, "price4":0, "price5":0, "price6":0, "price7":0, "price8":0, "price9":0},
+                  "electronics":{"count":0, "price1":0, "price2":0, "price3":0, "price4":0, "price5":0, "price6":0, "price7":0, "price8":0, "price9":0},
+                  "food":{"count":0, "price1":0, "price2":0, "price3":0, "price4":0, "price5":0, "price6":0, "price7":0, "price8":0, "price9":0},
+                  "broadcast":{"count":0, "price1":0, "price2":0, "price3":0, "price4":0, "price5":0, "price6":0, "price7":0, "price8":0, "price9":0}
                   }
 
 export default function StockSettingPage({ price, setPrice }) {
@@ -24,7 +25,28 @@ export default function StockSettingPage({ price, setPrice }) {
     navigate('/');
   }
   const changeEnd = () => {
+    const deleteData = async() => {
+      await axios.delete('http://18.221.173.188:8080/stocks');
+    }
+    const updateData = () => {
+      stockTypeArr.forEach(async (currStockType) => {
+        const defaultPutData = {
+          "price" : [],
+          "count" : 0
+        }
+        turnTypeArr.forEach((currTurnType) => {
+          if (currTurnType !== 'count') defaultPutData.price.push(priceList[currStockType][currTurnType]);
+          else defaultPutData.count = priceList[currStockType][currTurnType];
+        });
+        const serverUrl = 'http://18.221.173.188:8080/stocks' + '/' + currStockType;
+        await axios.post(serverUrl, defaultPutData);
+        console.log(defaultPutData + 'type : ' + currStockType);
+      });
+      alert('수정이 완료되었습니다.');
+    }
     setPrice(priceList);
+    deleteData();
+    updateData();
     navigate('/');
   }
 
@@ -44,14 +66,35 @@ export default function StockSettingPage({ price, setPrice }) {
                       {logo: logos.broadLogo, alt: "broadLogo", title: "방송", elementData: ["50", "51", "52", "53", "54", "55", "56", "57", "58", "59"], onChange: onChangeValue}];
 
   useEffect(() => {
-    const temp = document.getElementsByTagName('input')
-    const tempList = Array.prototype.slice.call(temp);
-    tempList.forEach(e => {
-      e.type = "number";
-      const stockType = (Number(e.id) - Number(e.id) % 10) / 10;
-      const turn = Number(e.id) % 10;
-      e.value = price[stockTypeArr[stockType - 1]][turnTypeArr[turn]];
-    });
+    var tempData;
+    const getData = async () => {
+      tempData = await axios.get('http://18.221.173.188:8080/stocks');
+      tempData = tempData.data;
+      tempData.forEach((oneData) => {
+        stockPrice[oneData.title]['count'] = oneData.count;
+        stockPrice[oneData.title]['price1'] = oneData.price1;
+        stockPrice[oneData.title]['price2'] = oneData.price2;
+        stockPrice[oneData.title]['price3'] = oneData.price3;
+        stockPrice[oneData.title]['price4'] = oneData.price4;
+        stockPrice[oneData.title]['price5'] = oneData.price5;
+        stockPrice[oneData.title]['price6'] = oneData.price6;
+        stockPrice[oneData.title]['price7'] = oneData.price7;
+        stockPrice[oneData.title]['price8'] = oneData.price8;
+        stockPrice[oneData.title]['price9'] = oneData.price9;
+      });
+      setPrice(stockPrice);
+      setPriceList(stockPrice);
+      const temp = document.getElementsByTagName('input')
+      const tempList = Array.prototype.slice.call(temp);
+      tempList.forEach(e => {
+        e.type = "number";
+        const stockType = (Number(e.id) - Number(e.id) % 10) / 10;
+        const turn = Number(e.id) % 10;
+        e.value = stockPrice[stockTypeArr[stockType - 1]][turnTypeArr[turn]];
+      });
+      alert('데이터를 불러왔습니다.');
+    }
+    getData();
   }, []);
 
   return (

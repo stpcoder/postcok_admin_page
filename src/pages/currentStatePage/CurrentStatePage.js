@@ -1,9 +1,73 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './currentStatePage.css';
 import { logos } from 'utils/GetLogo';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 
-export default function CurrentStatePage({ groupNumber }) {
+function MakeRow({ data }) {
+  const stockText = '생명 : ' + data.bio + ' 주 전자 : ' + data.electronics + ' 주 건축 : ' + data.construction + ' 주 방송 : ' + data.broadcast + ' 주 식품 : ' + data.food;
+  return (
+    <>
+      <tr>
+        <td class="tg-c3ow">{data.rank}</td>
+        <td class="tg-c3ow">{data.id}</td>
+        <td class="tg-c3ow">{data.asset}</td>
+        <td class="tg-c3ow">{data.cash}</td>
+        <td class="tg-c3ow">{stockText}</td>
+      </tr>
+    </>
+  )
+}
+
+function MakeTable( { dataList }) {
+  return (
+    <>
+      <table class="tg">
+        <thead>
+          <tr>
+            <th class="tg-c3ow">순위</th>
+            <th class="tg-c3ow">조</th>
+            <th class="tg-c3ow">환전 자산</th>
+            <th class="tg-c3ow">현금</th>
+            <th class="tg-c3ow">주식 보유 현황</th>
+          </tr>
+        </thead>
+        <tbody>
+          {dataList.map((data) => (
+            <MakeRow data={data}/>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )
+}
+
+
+export default function CurrentStatePage() {
+  const serverLink = '';
+  const [dataList, setDataList] = useState([]);
+
+  useEffect(() => {
+    var tempData;
+    var index = 1;
+    const getData = async () => {
+      tempData = await axios.get('http://18.221.173.188:8080/teams');
+      tempData = tempData.data;
+      tempData.sort((a, b)  => {
+        if(a.asset < b.asset) return 1;
+        if(a.asset === b.asset) return 0;
+        if(a.asset > b.asset) return -1;
+      });
+      tempData.forEach((oneData) => {
+        oneData.rank = index;
+        index++;
+      });
+      setDataList(tempData);
+      alert('데이터를 불러왔습니다.');
+    }
+    getData();
+  }, []);
+
   const navigate = useNavigate();
   const goMainPage = () => {
     navigate('/');
@@ -23,7 +87,7 @@ export default function CurrentStatePage({ groupNumber }) {
         </div>
         <div id="n4_403">
           <div id="n4_404">
-            table
+            <MakeTable dataList={dataList}/>
           </div>
         </div>
         <div id="n4_462">

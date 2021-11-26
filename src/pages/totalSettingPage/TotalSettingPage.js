@@ -7,7 +7,7 @@ const defaultTime = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],];
 
-export default function TotalSettingPage() {
+export default function TotalSettingPage({ turn, setTurn, price }) {
   const [sellMinute, setSellMinute] = useState(0);
   const [sellSecond, setSellSecond] = useState(0);
   const [solveMinute, setSolveMinute] = useState(0);
@@ -18,7 +18,7 @@ export default function TotalSettingPage() {
   const [sellStart, setSellStart] = useState(false);
   const [solveStart, setSolveStart] = useState(false);
   const [buyStart, setBuyStart] = useState(false);
-  const [turn, setTurn] = useState(1);
+  const [localTurn, setLocalTurn] = useState(turn);
   const [gameType, setGameType] = useState(1);
 
   const timeUpdate = (turnNum) => {
@@ -46,7 +46,7 @@ export default function TotalSettingPage() {
   useEffect(() => {
     const gameTemp = gameType === 1 ? 'sell' : gameType === 2 ? 'buy' : 'solve';
     document.getElementsByClassName(gameTemp)[0].style.background = "#94A8D6";
-    document.getElementsByClassName('turn' + turn)[0].style.background = "#94A8D6";
+    document.getElementsByClassName('turn' + localTurn)[0].style.background = "#94A8D6";
   }, []);
 
   useEffect(() => {
@@ -95,7 +95,6 @@ export default function TotalSettingPage() {
 
   useEffect(() => {
     if (sellStart) {
-      console.log('sell start');
       const sellTimer = setInterval(() => {
         if (sellSecond > 0) {
           setSellSecond(sellSecond - 1);
@@ -111,7 +110,6 @@ export default function TotalSettingPage() {
       }, 1000);
       return () => clearInterval(sellTimer);
     } else if (solveStart) {
-      console.log('solve start');
       const solveTimer = setInterval(() => {
         if (solveSecond > 0) {
           setSolveSecond(solveSecond - 1);
@@ -127,7 +125,6 @@ export default function TotalSettingPage() {
       }, 1000);
       return () => clearInterval(solveTimer);
     } else if (buyStart) {
-      console.log('buy start');
       const buyTimer = setInterval(() => {
         if (buySecond > 0) {
           setBuySecond(buySecond - 1);
@@ -136,9 +133,10 @@ export default function TotalSettingPage() {
             clearInterval(buyTimer);
             setGameType(1);
             setTimerActive(false);
-            const nextTurn = turn === 9 ? 1 : turn + 1;
+            const nextTurn = localTurn === 9 ? 1 : localTurn + 1;
+            setLocalTurn(nextTurn);
             setTurn(nextTurn);
-            document.getElementsByClassName('turn' + turn)[0].style.background = "white";
+            document.getElementsByClassName('turn' + localTurn)[0].style.background = "white";
             document.getElementsByClassName('turn' + nextTurn)[0].style.background = "#94A8D6";
           } else {
             setBuyMinute(buyMinute - 1);
@@ -156,27 +154,27 @@ export default function TotalSettingPage() {
       case 1 : 
         (Number(e.target.id) % 10) === 1 ? setSellMinute(Number(e.target.value)) : setSellSecond(Number(e.target.value));
         if ((Number(e.target.id) % 10) === 1) {
-          defaultTime[turn - 1][0] = Number(e.target.id);
+          defaultTime[localTurn - 1][0] = Number(e.target.id);
         } else {
-          defaultTime[turn - 1][1] = Number(e.target.id);
+          defaultTime[localTurn - 1][1] = Number(e.target.id);
         }
         break;
 
       case 2 : 
         (Number(e.target.id) % 10) === 1 ? setSolveMinute(Number(e.target.value)) : setSolveSecond(Number(e.target.value));
         if ((Number(e.target.id) % 10) === 1) {
-          defaultTime[turn - 1][2] = Number(e.target.id);
+          defaultTime[localTurn - 1][2] = Number(e.target.id);
         } else {
-          defaultTime[turn - 1][3] = Number(e.target.id);
+          defaultTime[localTurn - 1][3] = Number(e.target.id);
         }
         break;
 
       case 3 : 
         (Number(e.target.id) % 10) === 1 ? setBuyMinute(Number(e.target.value)) : setBuySecond(Number(e.target.value));
         if ((Number(e.target.id) % 10) === 1) {
-          defaultTime[turn - 1][4] = Number(e.target.id);
+          defaultTime[localTurn - 1][4] = Number(e.target.id);
         } else {
-          defaultTime[turn - 1][5] = Number(e.target.id);
+          defaultTime[localTurn - 1][5] = Number(e.target.id);
         }
         break;
 

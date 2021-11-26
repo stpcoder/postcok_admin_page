@@ -117,7 +117,6 @@ export default function UserInfoSettingPage({ groupNumber, setGroupNumber, group
 
     groupStock[text][e.target.id] = Number(e.target.value);
 
-    console.log(groupStock);
     setGroupStockList(groupStock);
   }
 
