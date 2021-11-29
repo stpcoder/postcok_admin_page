@@ -1,32 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import 'pages/stockSettingPage/stockSettingPage.css'
+import React, { useEffect } from 'react'
+import './stockSettingPage.css'
 import { useNavigate } from 'react-router';
 import { logos } from 'utils/GetLogo';
-import { stockTypeArr, turnTypeArr } from 'utils/GetConstant';
+import { stockTypeArr, turnTypeArr, stockPrice, defaultAPI } from 'utils/GetConstant';
 import OneRow from 'pages/stockSettingPage/stockSettingUtils';
 import axios from 'axios';
 
-const stockPrice = {"bio":{"count":0, "price1":0, "price2":0, "price3":0, "price4":0, "price5":0, "price6":0, "price7":0, "price8":0, "price9":0},
-                  "construction":{"count":0, "price1":0, "price2":0, "price3":0, "price4":0, "price5":0, "price6":0, "price7":0, "price8":0, "price9":0},
-                  "electronics":{"count":0, "price1":0, "price2":0, "price3":0, "price4":0, "price5":0, "price6":0, "price7":0, "price8":0, "price9":0},
-                  "food":{"count":0, "price1":0, "price2":0, "price3":0, "price4":0, "price5":0, "price6":0, "price7":0, "price8":0, "price9":0},
-                  "broadcast":{"count":0, "price1":0, "price2":0, "price3":0, "price4":0, "price5":0, "price6":0, "price7":0, "price8":0, "price9":0}
-                  }
-
-export default function StockSettingPage({ price, setPrice }) {
-  stockTypeArr.forEach((stockType) => {
-    turnTypeArr.forEach((turnType) => {
-      stockPrice[stockType][turnType] = price[stockType][turnType];
-    });
-  });
-  const [priceList, setPriceList] = useState(stockPrice);
+export default function StockSettingPage() {
   const navigate = useNavigate();
   const goMainPage = () => {
     navigate('/');
   }
   const changeEnd = () => {
     const deleteData = async() => {
-      await axios.delete('http://18.221.173.188:8080/stocks');
+      const text = defaultAPI + '/stocks';
+      await axios.delete(text);
     }
     const updateData = () => {
       stockTypeArr.forEach(async (currStockType) => {
@@ -35,28 +23,24 @@ export default function StockSettingPage({ price, setPrice }) {
           "count" : 0
         }
         turnTypeArr.forEach((currTurnType) => {
-          if (currTurnType !== 'count') defaultPutData.price.push(priceList[currStockType][currTurnType]);
-          else defaultPutData.count = priceList[currStockType][currTurnType];
+          if (currTurnType !== 'count') defaultPutData.price.push(stockPrice[currStockType][currTurnType]);
+          else defaultPutData.count = stockPrice[currStockType][currTurnType];
         });
-        const serverUrl = 'http://18.221.173.188:8080/stocks' + '/' + currStockType;
+        const serverUrl = defaultAPI + '/stocks/' + currStockType;
         await axios.post(serverUrl, defaultPutData);
         console.log(defaultPutData + 'type : ' + currStockType);
       });
       alert('수정이 완료되었습니다.');
     }
-    setPrice(priceList);
     deleteData();
     updateData();
     navigate('/');
   }
-
   const onChangeValue = e => {
     const stockType = (Number(e.target.id) - Number(e.target.id) % 10) / 10;
     const turn = Number(e.target.id) % 10;
     const value = Number(e.target.value);
-
     stockPrice[stockTypeArr[stockType - 1]][turnTypeArr[turn]] = value;
-    setPriceList(stockPrice);
   }
 
   const rowDataList = [{logo: logos.bioLogo, alt: "bioLogo", title: "생명", elementData: ["10", "11", "12", "13", "14", "15", "16", "17", "18", "19"], onChange: onChangeValue}, 
@@ -68,22 +52,14 @@ export default function StockSettingPage({ price, setPrice }) {
   useEffect(() => {
     var tempData;
     const getData = async () => {
-      tempData = await axios.get('http://18.221.173.188:8080/stocks');
+      const text = defaultAPI + '/stocks';
+      tempData = await axios.get(text);
       tempData = tempData.data;
       tempData.forEach((oneData) => {
-        stockPrice[oneData.title]['count'] = oneData.count;
-        stockPrice[oneData.title]['price1'] = oneData.price1;
-        stockPrice[oneData.title]['price2'] = oneData.price2;
-        stockPrice[oneData.title]['price3'] = oneData.price3;
-        stockPrice[oneData.title]['price4'] = oneData.price4;
-        stockPrice[oneData.title]['price5'] = oneData.price5;
-        stockPrice[oneData.title]['price6'] = oneData.price6;
-        stockPrice[oneData.title]['price7'] = oneData.price7;
-        stockPrice[oneData.title]['price8'] = oneData.price8;
-        stockPrice[oneData.title]['price9'] = oneData.price9;
+        turnTypeArr.forEach((tempTurnType) => {
+          stockPrice[oneData.title][tempTurnType] = oneData[tempTurnType];
+        });
       });
-      setPrice(stockPrice);
-      setPriceList(stockPrice);
       const temp = document.getElementsByTagName('input')
       const tempList = Array.prototype.slice.call(temp);
       tempList.forEach(e => {
@@ -110,13 +86,13 @@ export default function StockSettingPage({ price, setPrice }) {
           <div id="n2_174">주식 정보 수정</div>
         </div>
         <div id="n2_2">
-          <table class="tg">
+          <table class="n2_tg">
             <thead>
               <tr>
-                <th class="tg-c3ow">로고</th>
-                <th class="tg-c3ow">종목</th>
-                <th class="tg-c3ow">주식 수</th>
-                <th class="tg-c3ow" colspan="9">턴 별 가격</th>
+                <th class="n2_th-tg-c3ow">로고</th>
+                <th class="n2_th-tg-c3ow">종목</th>
+                <th class="n2_th-tg-c3ow">주식 수</th>
+                <th class="n2_th-tg-c3ow" colspan="9">턴 별 가격</th>
               </tr>
             </thead>
             <tbody>

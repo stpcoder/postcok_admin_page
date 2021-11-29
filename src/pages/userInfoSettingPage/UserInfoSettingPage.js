@@ -2,82 +2,121 @@ import React, { useState, useEffect } from 'react'
 import './userInfoSettingPage.css';
 import { useNavigate } from 'react-router';
 import { logos } from 'utils/GetLogo';
+import { userInfoButtonList, defaultAPI } from 'utils/GetConstant';
+import axios from 'axios';
 
-const stockTypeArr = ['bio', 'construction', 'electronics', 'food', 'broadcast', 'tot'];
-const buttonList = {1:true, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8:false, 9:false, 10:false, 11:false, 12:false};
-const groupStock = {'group1': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
-                    'group2': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
-                    'group3': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
-                    'group4': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
-                    'group5': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
-                    'group6': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
-                    'group7': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
-                    'group8': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
-                    'group9': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
-                    'group10': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
-                    'group11': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0},
-                    'group12': {'tot':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0}
-                    };
+const buttonListTemp = {1:true, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8:false, 9:false, 10:false, 11:false, 12:false};
+const groupStock = {'group1': {'cash':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0}};
 
-export default function UserInfoSettingPage({ groupNumber, setGroupNumber, groupInfo, setGroupInfo }) {
-  for (var i = 1; i <= 12; i++) {
-    const text = 'group' + i;
-    stockTypeArr.forEach((stockType) => {
-      groupStock[text][stockType] = groupInfo[text][stockType];
-    });
-  }
-
+export default function UserInfoSettingPage() {
   const [selectedGroup, setSelectedGroup] = useState(1);
-  const [groupNum, setGroupNum] = useState(groupNumber);
-  const [groupStockList, setGroupStockList] = useState(groupStock);
-  const [buttonShowList, setButtonShowList] = useState(buttonList);
+  const [serverData, setServerData] = useState();
+  const [groupNum, setGroupNum] = useState(1);
+  const [buttonList, setButtonList] = useState(buttonListTemp);
 
   useEffect(() => {
-    for (var i = 1; i <= groupNumber; i++) {
-      buttonList[i] = true;
+    const getGroupNum = async() => {
+      const text = defaultAPI + '/teams';
+      var tempData = await axios.get(text);
+      tempData = tempData.data;
+      for (var i = 1; i <= 12; i++) {
+        if (i > tempData.length) buttonListTemp[i] = false;
+        else {
+          const tempText = 'group' + i;
+          groupStock[tempText] = tempData[i - 1];
+          buttonListTemp[i] = true;
+        }
+      }
+      userInfoButtonList.forEach((typeName) => {
+        const inputTag = document.getElementById(typeName);
+        inputTag.type = "number";
+        inputTag.value = groupStock['group1'][typeName];
+      });
+      document.getElementsByClassName(1)[0].style.background = '#94A8D6';
+      console.log('서버에서 데이터를 불러왔습니다.');
+      setServerData(tempData);
+      setButtonList(buttonListTemp);
+      setGroupNum(tempData.length);
+      return tempData.length;
     }
-    setButtonShowList(buttonList);
-    document.getElementsByClassName(selectedGroup)[0].style.background = '#94A8D6';
-
-    stockTypeArr.forEach((typeName) => {
-      const inputTag = document.getElementById(typeName);
-      inputTag.value = groupStockList['group1'][typeName];
-    });
+    getGroupNum();
   }, []);
 
   const navigate = useNavigate();
   const goMainPage = () => {
-    const temp = document.getElementsByTagName('input')
-    const tempList = Array.prototype.slice.call(temp);
-    tempList.forEach(e => {
-      e.value = 0;
-    });
-    setGroupNum(groupNumber);
-    setSelectedGroup(1);
+    for (var i = 1; i <= groupNum; i++) {
+      const tempText = 'group' + i;
+      groupStock[tempText] = {'cash':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0};
+    }
     document.getElementsByClassName(selectedGroup)[0].style.background = 'white';
     document.getElementsByClassName(1)[0].style.background = '#94A8D6';
-    setGroupStockList(groupInfo);
-    for(var i = 1; i <= 12; i++) {
-      buttonList[i] = (i <= groupNumber) ? true : false;
-    }
-    setButtonShowList(buttonList);
     navigate('/');
   }
 
   const changeEnd = () => {
-    setGroupNumber(groupNum);
-    setGroupInfo(groupStockList);
-    alert('수정이 완료되었습니다.');
+    const putTeams = () => {
+      const tempArray = [];
+      for (var i = 1; i <= groupNum; i++) {
+        const tempText = 'group' + i;
+        tempArray.push(groupStock[tempText]);
+      }
+      var j = 1;
+      tempArray.forEach(async () => {
+        const text = defaultAPI + '/teams/' + j;
+        const tempText = 'group' + j;
+        await axios.put(text, {
+          "cash": Number(groupStock[tempText]["cash"]),
+          "bio": Number(groupStock[tempText]["bio"]),
+          "electronics": Number(groupStock[tempText]["electronics"]),
+          "construction": Number(groupStock[tempText]["construction"]),
+          "food": Number(groupStock[tempText]["food"]),
+          "broadcast": Number(groupStock[tempText]["broadcast"])
+        });
+        console.log('put');
+        console.log(groupStock[tempText]);
+        j++;
+      });
+      alert('수정이 완료되었습니다.');
+    }
+    const postTeams = () => {
+      const tempArray = [];
+      for (var i = 1; i <= groupNum; i++) {
+        const tempText = 'group' + i;
+        tempArray.push(groupStock[tempText]);
+      }
+      tempArray.forEach(async () => {
+        const text = defaultAPI + '/teams';
+        await axios.post(text);
+        console.log('post');
+      })
+    }
+    const deleteData = async () => {
+      const text = defaultAPI + '/teams';
+      await axios.delete(text);
+      console.log('delete');
+    }
+    for (var i = 1; i <= groupNum; i++) {
+      const groupIndex = 'group' + i;
+      userInfoButtonList.forEach((typeName) => {
+        const inputTag = document.getElementById(typeName);
+        groupStock[groupIndex][typeName] = Number(inputTag.value);
+      });
+    }
+    deleteData();
+    postTeams();
+    putTeams();
+    document.getElementsByClassName(selectedGroup)[0].style.background = 'white';
+    document.getElementsByClassName(1)[0].style.background = '#94A8D6';
+    deleteData();
     navigate('/');
   }
 
   const groupClick = e => {
     const group = Number(e.target.className.replace(/[^0-9]/g,''));
     if(group === selectedGroup) return;
-
-    stockTypeArr.forEach((typeName) => {
+    userInfoButtonList.forEach((typeName) => {
       const inputTag = document.getElementById(typeName);
-      inputTag.value = groupStockList['group' + group][typeName];
+      inputTag.value = groupStock['group' + group][typeName];
     });
 
     setSelectedGroup(group);
@@ -86,38 +125,43 @@ export default function UserInfoSettingPage({ groupNumber, setGroupNumber, group
   }
 
   const plusGrounpNum = e => {
-    var num = groupNum + 1;
+    const num = groupNum + 1;
     if (num ===  13) {
       alert('그룹의 수는 12를 초과할 수 없습니다.');
       return;
     }
+    groupStock['group' + num] = {'cash':0, 'bio':0, 'construction':0, 'electronics':0, 'food':0, 'broadcast':0}
+    buttonListTemp[num] = true;
+    setButtonList(buttonListTemp);
     setGroupNum(num);
-    buttonList[num] = true;
-    setButtonShowList(buttonList);
   }
 
   const minusGroupNum = e => {
-    var num = groupNum;
+    const num = groupNum;
     if (num === 1) {
       alert('그룹의 수는 1보다 작을 수 없습니다.');
       return;
     }
     setGroupNum(num - 1);
-    buttonList[num] = false;
-    setButtonShowList(buttonList);
+    buttonListTemp[num] = false;
+    setButtonList(buttonListTemp);
+
     if (selectedGroup === num) {
+      userInfoButtonList.forEach((typeName) => {
+        const inputTag = document.getElementById(typeName);
+        inputTag.value = groupStock['group' + (num - 1)][typeName];
+      });
       setSelectedGroup(num - 1);
       document.getElementsByClassName(selectedGroup)[0].style.background = 'white';
       document.getElementsByClassName(num - 1)[0].style.background = '#94A8D6';
     }
+    const tempText = 'group' + num;
+    delete groupStock.tempText;
   }
 
-  const onChangeValue = e => {
+  const onChangeValue = (e) => {
     const text = 'group' + selectedGroup;
-
     groupStock[text][e.target.id] = Number(e.target.value);
-
-    setGroupStockList(groupStock);
   }
 
   return (
@@ -139,59 +183,59 @@ export default function UserInfoSettingPage({ groupNumber, setGroupNumber, group
               <div class="1" id="n3_403">
                 <div class="1조" id="n3_410" onClick={groupClick}>1조</div>
               </div>
-              {buttonShowList[2] &&
+              {buttonList[2] &&
                 <div class="2" id="n3_403">
                   <div class="2조" id="n3_410" onClick={groupClick}>2조</div>
                 </div>
               }
-              {buttonShowList[3] &&
+              {buttonList[3] &&
                 <div class="3" id="n3_403">
                   <div class="3조" id="n3_410" onClick={groupClick}>3조</div>
                 </div>
               }
-              {buttonShowList[4] &&
+              {buttonList[4] &&
                 <div class="4" id="n3_403">
                   <div class="4조" id="n3_410" onClick={groupClick}>4조</div>
                 </div>
               }
-              {buttonShowList[5] &&
+              {buttonList[5] &&
                 <div class="5" id="n3_403">
                   <div class="5조" id="n3_410" onClick={groupClick}>5조</div>
                 </div>
               }
-              {buttonShowList[6] &&
+              {buttonList[6] &&
                 <div class="6" id="n3_403">
                   <div class="6조" id="n3_410" onClick={groupClick}>6조</div>
                 </div>
               }                
             </div>
             <div id="n31_505">
-              {buttonShowList[7] &&
+              {buttonList[7] &&
                 <div class="7" id="n3_403">
                   <div class="7조" id="n3_410" onClick={groupClick}>7조</div>
                 </div>
               }
-              {buttonShowList[8] &&
+              {buttonList[8] &&
                 <div class="8" id="n3_403">
                   <div class="8조" id="n3_410" onClick={groupClick}>8조</div>
                 </div>
               }
-              {buttonShowList[9] &&
+              {buttonList[9] &&
                 <div class="9" id="n3_403">
                   <div class="9조" id="n3_410" onClick={groupClick}>9조</div>
                 </div>
               }
-              {buttonShowList[10] &&
+              {buttonList[10] &&
                 <div class="10" id="n3_403">
                   <div class="10조" id="n3_410" onClick={groupClick}>10조</div>
                 </div>
               }
-              {buttonShowList[11] &&
+              {buttonList[11] &&
                 <div class="11" id="n3_403">
                   <div class="11조" id="n3_410" onClick={groupClick}>11조</div>
                 </div>
               }  
-              {buttonShowList[12] &&
+              {buttonList[12] &&
                 <div class="12" id="n3_403">
                   <div class="12조" id="n3_410" onClick={groupClick}>12조</div>
                 </div>
@@ -213,7 +257,7 @@ export default function UserInfoSettingPage({ groupNumber, setGroupNumber, group
             </div>
             <div id="n3_491">
               <div id="n3_492">
-                <input id="tot" class="userInput" onChange={onChangeValue}/>
+                <input id="cash" class="userInput" onChange={onChangeValue}/>
               </div>
             </div>
             <div id="n3_465">

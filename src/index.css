@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Gowun';
+  font-style: normal;
+  font-weight: 100;
+  src: url("styles/GowunBatang-Regular-subset.woff") format('woff')
+}
+
+@font-face {
+  font-family: 'Gowun';
+  font-style: normal;
+  font-weight: normal;
+  src: url("styles/GowunBatang-Regular-subset.woff") format('woff')
+}
+
+@font-face {
+  font-family: 'Gowun';
+  font-style: normal;
+  font-weight: 500;
+  src: url("styles/GowunBatang-Regular-subset.woff") format('woff')
+}
+
+@font-face {
+  font-family: 'Gowun';
+  font-style: normal;
+  font-weight: bold;
+  src: url("styles/GowunBatang-Bold-subset.woff") format('woff')
+}
