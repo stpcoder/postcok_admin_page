@@ -28,7 +28,6 @@ export default function StockSettingPage() {
         });
         const serverUrl = defaultAPI + '/stocks/' + currStockType;
         await axios.post(serverUrl, defaultPutData);
-        console.log(defaultPutData + 'type : ' + currStockType);
       });
       alert('수정이 완료되었습니다.');
     }
@@ -51,15 +50,26 @@ export default function StockSettingPage() {
 
   useEffect(() => {
     var tempData;
+    var i = 0;
     const getData = async () => {
       const text = defaultAPI + '/stocks';
       tempData = await axios.get(text);
       tempData = tempData.data;
+
       tempData.forEach((oneData) => {
+        const title = oneData.title;
+        const count = oneData.count;
+        stockPrice[title]['count'] = count;
+        
         turnTypeArr.forEach((tempTurnType) => {
-          stockPrice[oneData.title][tempTurnType] = oneData[tempTurnType];
+          if (tempTurnType !== 'count') {
+            stockPrice[title][tempTurnType] = oneData.price[i] ? oneData.price[i] : 0;
+            i++
+          }
         });
+        i = 0;
       });
+
       const temp = document.getElementsByTagName('input')
       const tempList = Array.prototype.slice.call(temp);
       tempList.forEach(e => {
@@ -68,6 +78,7 @@ export default function StockSettingPage() {
         const turn = Number(e.id) % 10;
         e.value = stockPrice[stockTypeArr[stockType - 1]][turnTypeArr[turn]];
       });
+      
       alert('데이터를 불러왔습니다.');
     }
     getData();

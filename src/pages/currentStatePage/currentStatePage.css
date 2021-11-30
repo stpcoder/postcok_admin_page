@@ -42,13 +42,16 @@
 }
 
 #n4_404 {
+  padding-top: 40px;
   margin-left: auto;
   margin-right: auto;
   width: 1300px;
-  height: 650px;
+  height: 610px;
   border-radius: 35px 35px 35px 35px;
   box-shadow: 3px 3px 3px;
   background-color: white;
+  vertical-align: middle;
+  
 }
 
 #n4_447 {
@@ -74,35 +77,36 @@
   margin: 10px 0px 0px 0px;
 }
 
-.tg  {
-  border-collapse:collapse;
-  border-spacing:0;
+.n4_tg  {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: white;
 }
 
-.tg td{
+.n4_tg td{
   border-color:black;
   border-style:solid;
   border-width:1px;
-  font-family:Arial, sans-serif;
-  font-size:14px;
-  overflow:hidden;
-  padding:10px 5px;
+  font-size:20px;
+  vertical-align: middle;
+  padding:10px 10px;
   word-break:normal;
 }
 
-.tg th{
+.n4_tg th{
   border-color:black;
   border-style:solid;
   border-width:1px;
-  font-family:Arial, sans-serif;
-  font-size:14px;
+  font-size:20px;
   font-weight:normal;
   overflow:hidden;
-  padding:10px 5px;
+  padding:13px 10px;
   word-break:normal;
 }
 
-.tg .tg-c3ow{
+.n4_tg .n4_tg-c3ow{
   border-color:inherit;
   text-align:center;
   vertical-align:top

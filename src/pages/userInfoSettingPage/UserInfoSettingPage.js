@@ -33,7 +33,6 @@ export default function UserInfoSettingPage() {
         inputTag.value = groupStock['group1'][typeName];
       });
       document.getElementsByClassName(1)[0].style.background = '#94A8D6';
-      console.log('서버에서 데이터를 불러왔습니다.');
       setServerData(tempData);
       setButtonList(buttonListTemp);
       setGroupNum(tempData.length);
@@ -54,60 +53,31 @@ export default function UserInfoSettingPage() {
   }
 
   const changeEnd = () => {
-    const putTeams = () => {
-      const tempArray = [];
-      for (var i = 1; i <= groupNum; i++) {
-        const tempText = 'group' + i;
-        tempArray.push(groupStock[tempText]);
-      }
-      var j = 1;
-      tempArray.forEach(async () => {
-        const text = defaultAPI + '/teams/' + j;
-        const tempText = 'group' + j;
-        await axios.put(text, {
-          "cash": Number(groupStock[tempText]["cash"]),
-          "bio": Number(groupStock[tempText]["bio"]),
-          "electronics": Number(groupStock[tempText]["electronics"]),
-          "construction": Number(groupStock[tempText]["construction"]),
-          "food": Number(groupStock[tempText]["food"]),
-          "broadcast": Number(groupStock[tempText]["broadcast"])
-        });
-        console.log('put');
-        console.log(groupStock[tempText]);
-        j++;
+    const postTeams = async (j) => {
+      const text = defaultAPI + '/teams/' + j;
+      const tempText = 'group' + j;
+      await axios.post(text, {
+        "cash": Number(groupStock[tempText]["cash"]),
+        "bio": Number(groupStock[tempText]["bio"]),
+        "electronics": Number(groupStock[tempText]["electronics"]),
+        "construction": Number(groupStock[tempText]["construction"]),
+        "food": Number(groupStock[tempText]["food"]),
+        "broadcast": Number(groupStock[tempText]["broadcast"])
       });
-      alert('수정이 완료되었습니다.');
     }
-    const postTeams = () => {
-      const tempArray = [];
-      for (var i = 1; i <= groupNum; i++) {
-        const tempText = 'group' + i;
-        tempArray.push(groupStock[tempText]);
-      }
-      tempArray.forEach(async () => {
-        const text = defaultAPI + '/teams';
-        await axios.post(text);
-        console.log('post');
-      })
-    }
+
     const deleteData = async () => {
       const text = defaultAPI + '/teams';
       await axios.delete(text);
-      console.log('delete');
     }
-    for (var i = 1; i <= groupNum; i++) {
-      const groupIndex = 'group' + i;
-      userInfoButtonList.forEach((typeName) => {
-        const inputTag = document.getElementById(typeName);
-        groupStock[groupIndex][typeName] = Number(inputTag.value);
-      });
-    }
+
     deleteData();
-    postTeams();
-    putTeams();
+    for (var j = 1; j <= groupNum; j++) {
+      postTeams(j);
+    }
+    alert('수정이 완료되었습니다.');
     document.getElementsByClassName(selectedGroup)[0].style.background = 'white';
     document.getElementsByClassName(1)[0].style.background = '#94A8D6';
-    deleteData();
     navigate('/');
   }
 
@@ -180,64 +150,64 @@ export default function UserInfoSettingPage() {
         <div id="n32_1">
           <div id="n31_503">
             <div id="n31_504">
-              <div class="1" id="n3_403">
-                <div class="1조" id="n3_410" onClick={groupClick}>1조</div>
+              <div class="1" id="n3_403"onClick={groupClick}>
+                <div class="1조" id="n3_410" >1조</div>
               </div>
               {buttonList[2] &&
-                <div class="2" id="n3_403">
-                  <div class="2조" id="n3_410" onClick={groupClick}>2조</div>
+                <div class="2" id="n3_403"onClick={groupClick}>
+                  <div class="2조" id="n3_410" >2조</div>
                 </div>
               }
               {buttonList[3] &&
-                <div class="3" id="n3_403">
-                  <div class="3조" id="n3_410" onClick={groupClick}>3조</div>
+                <div class="3" id="n3_403"onClick={groupClick}>
+                  <div class="3조" id="n3_410" >3조</div>
                 </div>
               }
               {buttonList[4] &&
-                <div class="4" id="n3_403">
-                  <div class="4조" id="n3_410" onClick={groupClick}>4조</div>
+                <div class="4" id="n3_403"onClick={groupClick}>
+                  <div class="4조" id="n3_410" >4조</div>
                 </div>
               }
               {buttonList[5] &&
-                <div class="5" id="n3_403">
-                  <div class="5조" id="n3_410" onClick={groupClick}>5조</div>
+                <div class="5" id="n3_403"onClick={groupClick}>
+                  <div class="5조" id="n3_410" >5조</div>
                 </div>
               }
               {buttonList[6] &&
-                <div class="6" id="n3_403">
-                  <div class="6조" id="n3_410" onClick={groupClick}>6조</div>
+                <div class="6" id="n3_403"onClick={groupClick}>
+                  <div class="6조" id="n3_410" >6조</div>
                 </div>
               }                
             </div>
             <div id="n31_505">
               {buttonList[7] &&
-                <div class="7" id="n3_403">
-                  <div class="7조" id="n3_410" onClick={groupClick}>7조</div>
+                <div class="7" id="n3_403"onClick={groupClick}>
+                  <div class="7조" id="n3_410">7조</div>
                 </div>
               }
               {buttonList[8] &&
-                <div class="8" id="n3_403">
-                  <div class="8조" id="n3_410" onClick={groupClick}>8조</div>
+                <div class="8" id="n3_403"onClick={groupClick}>
+                  <div class="8조" id="n3_410" >8조</div>
                 </div>
               }
               {buttonList[9] &&
-                <div class="9" id="n3_403">
-                  <div class="9조" id="n3_410" onClick={groupClick}>9조</div>
+                <div class="9" id="n3_403"onClick={groupClick}>
+                  <div class="9조" id="n3_410" >9조</div>
                 </div>
               }
               {buttonList[10] &&
-                <div class="10" id="n3_403">
-                  <div class="10조" id="n3_410" onClick={groupClick}>10조</div>
+                <div class="10" id="n3_403"onClick={groupClick}>
+                  <div class="10조" id="n3_410" >10조</div>
                 </div>
               }
               {buttonList[11] &&
-                <div class="11" id="n3_403">
-                  <div class="11조" id="n3_410" onClick={groupClick}>11조</div>
+                <div class="11" id="n3_403"onClick={groupClick}>
+                  <div class="11조" id="n3_410" >11조</div>
                 </div>
               }  
               {buttonList[12] &&
-                <div class="12" id="n3_403">
-                  <div class="12조" id="n3_410" onClick={groupClick}>12조</div>
+                <div class="12" id="n3_403" onClick={groupClick}>
+                  <div class="12조" id="n3_410" >12조</div>
                 </div>
               }      
             </div>

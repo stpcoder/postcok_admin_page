@@ -5,15 +5,15 @@ import { useNavigate } from 'react-router';
 import axios from 'axios';
 
 function MakeRow({ data }) {
-  const stockText = '생명 : ' + data.bio + ' 주 전자 : ' + data.electronics + ' 주 건축 : ' + data.construction + ' 주 방송 : ' + data.broadcast + ' 주 식품 : ' + data.food;
+  const stockText = '생명 : ' + data.bio + '주/ 전자 : ' + data.electronics + '주/ 건축 : ' + data.construction + '주/ 방송 : ' + data.broadcast + '주/ 식품 : ' + data.food;
   return (
     <>
       <tr>
-        <td class="tg-c3ow">{data.rank}</td>
-        <td class="tg-c3ow">{data.id}</td>
-        <td class="tg-c3ow">{data.asset}</td>
-        <td class="tg-c3ow">{data.cash}</td>
-        <td class="tg-c3ow">{stockText}</td>
+        <td class="n4_tg-c3ow">{data.rank}</td>
+        <td class="n4_tg-c3ow">{data.id}</td>
+        <td class="n4_tg-c3ow">{data.asset}</td>
+        <td class="n4_tg-c3ow">{data.cash}</td>
+        <td class="n4_tg-c3ow">{stockText}</td>
       </tr>
     </>
   )
@@ -22,14 +22,14 @@ function MakeRow({ data }) {
 function MakeTable( { dataList }) {
   return (
     <>
-      <table class="tg">
+      <table class="n4_tg">
         <thead>
           <tr>
-            <th class="tg-c3ow">순위</th>
-            <th class="tg-c3ow">조</th>
-            <th class="tg-c3ow">환전 자산</th>
-            <th class="tg-c3ow">현금</th>
-            <th class="tg-c3ow">주식 보유 현황</th>
+            <th class="n4_tg-c3ow">순위</th>
+            <th class="n4_tg-c3ow">조</th>
+            <th class="n4_tg-c3ow">환전 자산</th>
+            <th class="n4_tg-c3ow">현금</th>
+            <th class="n4_tg-c3ow">주식 보유 현황</th>
           </tr>
         </thead>
         <tbody>
