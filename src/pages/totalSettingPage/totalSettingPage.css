@@ -97,10 +97,11 @@
   width: 150px;
   height: 70px;
   margin-right: 25px;
+  text-align: center;
 }
 
 #n5_306 {
-  margin: 10px 0px 0px 0px;
+  margin: 15px 0px 0px 0px;
   font-size: 35px;
 }
 
@@ -127,11 +128,12 @@
   float: left;
   height: 70px;
   width: 50px;
+  text-align: center;
 }
 
 #n5_310 {
   font-size: 35px;
-  margin: 10px 0px 0px 5px;
+  margin: 15px 0px 0px 0px;
 }
 
 #n5_400 {
@@ -235,3 +237,11 @@
 .test:focus {
   background: aliceblue;
 }
+
+.n5_1_tg  {border-collapse:collapse;border-spacing:0;}
+.n5_1_tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.n5_1_tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.n5_1_tg .n5_1_tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
+.n5_1_tg .n5_1_tg-0pky{border-color:inherit;text-align:left;vertical-align:top}

@@ -2,6 +2,43 @@ import React, { useState, useEffect } from 'react'
 import './totalSettingPage.css';
 import { logos } from 'utils/GetLogo';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
+import { defaultAPI } from 'utils/GetConstant';
+
+function SellTradeRow({groupTradeData}) {
+  const outputText = '생명 ' + groupTradeData.bio + '주, 전자 ' + groupTradeData.electronics + '주, 건축 ' + groupTradeData.construction + '주, 방송 ' + groupTradeData.broadcast + '주, 식풍 ' + groupTradeData.food;
+  return (
+    <>
+      <tbody>
+        <tr>
+          <td class="n5_1_tg-0pky">{groupTradeData.teamID  + '조'}</td>
+          <td class="n5_1_tg-0pky">{outputText}</td>
+        </tr>
+      </tbody>
+    </>
+  )
+}
+
+function SellTradeLog({sellData}) {
+  return (
+    <>
+      <table class="n5_1_tg">
+      <thead>
+        <tr>
+          <th class="n5_1_tg-7btt">조 이름</th>
+          <th class="n5_1_tg-7btt">판매 정보</th>
+        </tr>
+      </thead>
+        {sellData.map((oneData) => (
+          <SellTradeRow groupTradeData={oneData}/>
+        ))}
+      </table>
+    </>
+  )
+}
+
+
+
 
 const defaultTime = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], 
                     [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],
@@ -20,6 +57,15 @@ export default function TotalSettingPage({ turn, setTurn, price }) {
   const [buyStart, setBuyStart] = useState(false);
   const [localTurn, setLocalTurn] = useState(turn);
   const [gameType, setGameType] = useState(1);
+  const [sellData, setSellData] = useState([]);
+
+  const getData = async (dataType) => {
+    const tradeData = await axios.get(defaultAPI + '/all').data;
+    
+    if (dataType === 'sell') {
+      
+    }
+  }
 
   const timeUpdate = (turnNum) => {
     setSellMinute(defaultTime[turnNum - 1][0]);
@@ -47,6 +93,7 @@ export default function TotalSettingPage({ turn, setTurn, price }) {
     const gameTemp = gameType === 1 ? 'sell' : gameType === 2 ? 'buy' : 'solve';
     document.getElementsByClassName(gameTemp)[0].style.background = "#94A8D6";
     document.getElementsByClassName('turn' + localTurn)[0].style.background = "#94A8D6";
+
   }, []);
 
   useEffect(() => {
