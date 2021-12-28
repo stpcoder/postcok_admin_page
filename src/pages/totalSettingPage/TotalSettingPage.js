@@ -7,14 +7,13 @@ import { defaultAPI, groupCount } from 'utils/GetConstant';
 import SellTradeLog from './SellLog';
 import SolvingLog from './SolvingLog';
 import PurchaseLog from './PurchaseLog';
-import socketio from 'socket.io-client';
 
 const defaultTime = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], 
                     [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],];
 
-export default function TotalSettingPage({ turn, setTurn, price, groupNum }) {
-  const socket = socketio.connect(defaultAPI);
+
+export default function TotalSettingPage({ socket, turn, setTurn, price, groupNum }) {
   var tradeDataInterval;
   const groupData = [];
   const [sellMinute, setSellMinute] = useState(0);
@@ -83,7 +82,7 @@ export default function TotalSettingPage({ turn, setTurn, price, groupNum }) {
       setTimerActive(true);
       const lastTime = sellMinute * 60 + sellSecond + buyMinute * 60 + buySecond + solveMinute * 60 + solveSecond;
       socket.on('gameStart', () => {
-        socket.emit('gameStart', lastTime);
+        socket.emit('gameStart', {lastTime});
       });
     } 
   }

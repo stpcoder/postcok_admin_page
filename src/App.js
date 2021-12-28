@@ -7,6 +7,7 @@ import CurrentStatePage from 'pages/currentStatePage/CurrentStatePage';
 import TotalSettingPage from 'pages/totalSettingPage/TotalSettingPage';
 import { defaultAPI, groupInfoList } from 'utils/GetConstant';
 import axios from 'axios';
+import io from 'socket.io-client';
 
 function App() {
   const [groupNumber, setGroupNumber] = useState(1);
@@ -32,6 +33,8 @@ function App() {
     setGroupNumber(temp.length);
   }, []);
 
+  const socket = io(defaultAPI,  {transports : ['websocket']});
+
   return (
     <div>
       <Routes>
@@ -39,7 +42,7 @@ function App() {
         <Route path = '/stockSetting' exact element = {<StockSettingPage/>}/>
         <Route path = '/userInfo' exact element = {<UserInfoSettingPage/>}/>
         <Route path = '/currentState' exact element = {<CurrentStatePage/>}/>
-        <Route path = '/totalSetting' exact element = {<TotalSettingPage groupNum={groupNumber} turn={turn} setTurn={setTurn} groupNumber={groupNumber}/>}/>
+        <Route path = '/totalSetting' exact element = {<TotalSettingPage socket = {socket} groupNum={groupNumber} turn={turn} setTurn={setTurn} groupNumber={groupNumber}/>}/>
       </Routes>
     </div>
   );
