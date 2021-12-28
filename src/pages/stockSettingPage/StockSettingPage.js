@@ -33,7 +33,6 @@ export default function StockSettingPage() {
     }
     deleteData();
     updateData();
-    navigate('/');
   }
   const onChangeValue = e => {
     const stockType = (Number(e.target.id) - Number(e.target.id) % 10) / 10;
@@ -64,7 +63,7 @@ export default function StockSettingPage() {
         turnTypeArr.forEach((tempTurnType) => {
           if (tempTurnType !== 'count') {
             stockPrice[title][tempTurnType] = oneData.price[i] ? oneData.price[i] : 0;
-            i++
+            i++;
           }
         });
         i = 0;

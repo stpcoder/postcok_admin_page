@@ -78,7 +78,6 @@ export default function UserInfoSettingPage() {
     alert('수정이 완료되었습니다.');
     document.getElementsByClassName(selectedGroup)[0].style.background = 'white';
     document.getElementsByClassName(1)[0].style.background = '#94A8D6';
-    navigate('/');
   }
 
   const groupClick = e => {

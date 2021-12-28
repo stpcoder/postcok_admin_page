@@ -3,48 +3,20 @@ import './totalSettingPage.css';
 import { logos } from 'utils/GetLogo';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
-import { defaultAPI } from 'utils/GetConstant';
-
-function SellTradeRow({groupTradeData}) {
-  const outputText = '생명 ' + groupTradeData.bio + '주, 전자 ' + groupTradeData.electronics + '주, 건축 ' + groupTradeData.construction + '주, 방송 ' + groupTradeData.broadcast + '주, 식풍 ' + groupTradeData.food;
-  return (
-    <>
-      <tbody>
-        <tr>
-          <td class="n5_1_tg-0pky">{groupTradeData.teamID  + '조'}</td>
-          <td class="n5_1_tg-0pky">{outputText}</td>
-        </tr>
-      </tbody>
-    </>
-  )
-}
-
-function SellTradeLog({sellData}) {
-  return (
-    <>
-      <table class="n5_1_tg">
-      <thead>
-        <tr>
-          <th class="n5_1_tg-7btt">조 이름</th>
-          <th class="n5_1_tg-7btt">판매 정보</th>
-        </tr>
-      </thead>
-        {sellData.map((oneData) => (
-          <SellTradeRow groupTradeData={oneData}/>
-        ))}
-      </table>
-    </>
-  )
-}
-
-
-
+import { defaultAPI, groupCount } from 'utils/GetConstant';
+import SellTradeLog from './SellLog';
+import SolvingLog from './SolvingLog';
+import PurchaseLog from './PurchaseLog';
+import socketio from 'socket.io-client';
 
 const defaultTime = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], 
                     [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],];
 
-export default function TotalSettingPage({ turn, setTurn, price }) {
+export default function TotalSettingPage({ turn, setTurn, price, groupNum }) {
+  const socket = socketio.connect(defaultAPI);
+  var tradeDataInterval;
+  const groupData = [];
   const [sellMinute, setSellMinute] = useState(0);
   const [sellSecond, setSellSecond] = useState(0);
   const [solveMinute, setSolveMinute] = useState(0);
@@ -57,23 +29,48 @@ export default function TotalSettingPage({ turn, setTurn, price }) {
   const [buyStart, setBuyStart] = useState(false);
   const [localTurn, setLocalTurn] = useState(turn);
   const [gameType, setGameType] = useState(1);
-  const [sellData, setSellData] = useState([]);
+  const [tradeData, setTradeData] = useState([]);
+  const [successData, setSuccessData] = useState([]);
 
   const getData = async (dataType) => {
-    const tradeData = await axios.get(defaultAPI + '/all').data;
-    
-    if (dataType === 'sell') {
-      
+    clearInterval(tradeDataInterval);
+    if (dataType === 'solving') {
+      var temp = [];
+      for (var i = 0; i < groupNum; i++) {
+        temp.push({
+          id : i, solution : null
+        });
+      }
+      setTradeData(temp);
+      return;
+    }
+
+    var tradeData = await axios.get(defaultAPI + '/trade/all');
+    tradeData = tradeData.data;
+    tradeData.filter((element) => (element.type === dataType));
+    tradeData.filter((element) => (element.turn === turn));
+    setTradeData(tradeData);
+
+    if (dataType === 'purchase') {
+      var tempSuccessData = [];
+      tradeData.forEach(async (oneElement) => {
+        if (dataType === 'purchase') {
+          var successData = await axios.get(defaultAPI + '/trade/success', oneElement.teamID, oneElement.turn, 'purchase');
+          successData = successData ? successData.data : {teamID : oneElement.teamID};
+          tempSuccessData.append(successData);
+        }
+      });
+      setSuccessData(tempSuccessData);
     }
   }
 
-  const timeUpdate = (turnNum) => {
-    setSellMinute(defaultTime[turnNum - 1][0]);
-    setSellSecond(defaultTime[turnNum - 1][1]);
-    setSolveMinute(defaultTime[turnNum - 1][2]);
-    setSolveSecond(defaultTime[turnNum - 1][3]);
-    setBuyMinute(defaultTime[turnNum - 1][4]);
-    setBuySecond(defaultTime[turnNum - 1][5]);
+  const sendMoney = async () => {
+    const buttonList = document.getElementsByClassName('solvingInput');
+    buttonList.forEach(async (element) => {
+      var value = await axios.get(defaultAPI + '/teams/' + element.id + '/cash');
+      value = value.data.count + element.value;
+      await axios.put(defaultAPI + '/teams/' + element.id + '/cash', {cash : value});
+    });
   }
 
   const navigate = useNavigate();
@@ -82,18 +79,30 @@ export default function TotalSettingPage({ turn, setTurn, price }) {
   }
   
   const startTimer = () => {
-    if (!timerActive) setTimerActive(true);
+    if (!timerActive) {
+      setTimerActive(true);
+      const lastTime = sellMinute * 60 + sellSecond + buyMinute * 60 + buySecond + solveMinute * 60 + solveSecond;
+      socket.on('gameStart', () => {
+        socket.emit('gameStart', lastTime);
+      });
+    } 
   }
 
   const stopTimer = () => {
-    if (timerActive) setTimerActive(false);
+    if (timerActive) {
+      setTimerActive(false);
+      const lastTime = sellMinute * 60 + sellSecond + buyMinute * 60 + buySecond + solveMinute * 60 + solveSecond;
+      socket.on('gameStop', () => {
+        socket.emit('gameStop', lastTime);
+      });
+    }
   }
 
   useEffect(() => {
     const gameTemp = gameType === 1 ? 'sell' : gameType === 2 ? 'buy' : 'solve';
     document.getElementsByClassName(gameTemp)[0].style.background = "#94A8D6";
     document.getElementsByClassName('turn' + localTurn)[0].style.background = "#94A8D6";
-
+    getData('sale');
   }, []);
 
   useEffect(() => {
@@ -116,7 +125,7 @@ export default function TotalSettingPage({ turn, setTurn, price }) {
   useEffect(() => {
     switch(gameType) {
       case 1:
-        document.getElementsByClassName('buy')[0].style.background = "white";
+      document.getElementsByClassName('buy')[0].style.background = "white";
         document.getElementsByClassName('sell')[0].style.background = "#94A8D6";
         setBuyStart(false);
         break;
@@ -143,6 +152,7 @@ export default function TotalSettingPage({ turn, setTurn, price }) {
   useEffect(() => {
     if (sellStart) {
       const sellTimer = setInterval(() => {
+        getData('sale');
         if (sellSecond > 0) {
           setSellSecond(sellSecond - 1);
         } else if (sellSecond === 0) {
@@ -158,6 +168,7 @@ export default function TotalSettingPage({ turn, setTurn, price }) {
       return () => clearInterval(sellTimer);
     } else if (solveStart) {
       const solveTimer = setInterval(() => {
+        getData('solving');
         if (solveSecond > 0) {
           setSolveSecond(solveSecond - 1);
         } else if (solveSecond === 0) {
@@ -166,13 +177,14 @@ export default function TotalSettingPage({ turn, setTurn, price }) {
             setGameType(3);
           } else {
             setSolveMinute(solveMinute - 1);
-            setSolveMinute(59);
+            setSolveSecond(59);
           }
         }
       }, 1000);
       return () => clearInterval(solveTimer);
     } else if (buyStart) {
       const buyTimer = setInterval(() => {
+        getData('purchase');
         if (buySecond > 0) {
           setBuySecond(buySecond - 1);
         } else if (buySecond === 0) {
@@ -183,6 +195,15 @@ export default function TotalSettingPage({ turn, setTurn, price }) {
             const nextTurn = localTurn === 9 ? 1 : localTurn + 1;
             setLocalTurn(nextTurn);
             setTurn(nextTurn);
+            socket.on('nextTurn', () => {
+              socket.emit('nextTurn', nextTurn);
+            });
+            socket.on('endPurchase', () => {
+              socket.emit('endPurchase', true);
+            });
+            socket.on('gameStop', () => {
+              socket.emit('gameStop', 0);
+            });
             document.getElementsByClassName('turn' + localTurn)[0].style.background = "white";
             document.getElementsByClassName('turn' + nextTurn)[0].style.background = "#94A8D6";
           } else {
@@ -351,7 +372,10 @@ export default function TotalSettingPage({ turn, setTurn, price }) {
               </div>
             </div>
             <div id="n5_405">
-
+              {(gameType === 1) && <SellTradeLog sellData={tradeData}/>}
+              {(gameType === 2) && <SolvingLog groupData={groupData}/>}
+              {(gameType === 2) && <button id="n5_447" onClick={sendMoney}><div id="n5_449">보내기</div></button>}
+              {(gameType === 3) && <PurchaseLog sellData={tradeData} successData={successData}/>}
             </div>
           </div>
         </div>
@@ -364,3 +388,4 @@ export default function TotalSettingPage({ turn, setTurn, price }) {
     </div>
   )
 }
+
