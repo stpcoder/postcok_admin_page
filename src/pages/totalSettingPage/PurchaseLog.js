@@ -6,7 +6,7 @@ function SellTradeRow({sellData}) {
     <>
       <tbody>
         <tr>
-          <td class="n5_1_tg-0pky">{sellData.teamID  + '조'}</td>
+          <td class="n5_1_tg-0pky">{sellData.teamId  + '조'}</td>
           <td class="n5_1_tg-0pky">{outputFirstText}</td>
           <td class="n5_1_tg-0pky">{outputSecondText}</td>
         </tr>

@@ -1,11 +1,11 @@
 import React from 'react'
 function SellTradeRow({groupTradeData}) {
-  const outputText = '생명 ' + groupTradeData.bio + '주, 전자 ' + groupTradeData.electronics + '주, 건축 ' + groupTradeData.construction + '주, 방송 ' + groupTradeData.broadcast + '주, 식품 ' + groupTradeData.food;
+  const outputText = '생명 ' + groupTradeData.bio + '주, 전자 ' + groupTradeData.electronics + '주, 건축 ' + groupTradeData.construction + '주, 방송 ' + groupTradeData.broadcast + '주, 식품 ' + groupTradeData.food + '주';
   return (
     <>
       <tbody>
         <tr>
-          <td class="n5_1_tg-0pky">{groupTradeData.teamID  + '조'}</td>
+          <td class="n5_1_tg-0pky">{groupTradeData.teamId  + '조'}</td>
           <td class="n5_1_tg-0pky">{outputText}</td>
         </tr>
       </tbody>

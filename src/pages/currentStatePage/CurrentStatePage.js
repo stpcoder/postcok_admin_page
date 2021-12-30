@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import axios from 'axios';
 
 function MakeRow({ data }) {
-  const stockText = '생명 : ' + data.bio + '주/ 전자 : ' + data.electronics + '주/ 건축 : ' + data.construction + '주/ 방송 : ' + data.broadcast + '주/ 식품 : ' + data.food;
+  const stockText = '생명 : ' + data.bio + '주/ 전자 : ' + data.electronics + '주/ 건축 : ' + data.construction + '주/ 방송 : ' + data.broadcast + '주/ 식품 : ' + data.food + '주';
   return (
     <>
       <tr>

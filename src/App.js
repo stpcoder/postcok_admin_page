@@ -42,7 +42,7 @@ function App() {
         <Route path = '/stockSetting' exact element = {<StockSettingPage/>}/>
         <Route path = '/userInfo' exact element = {<UserInfoSettingPage/>}/>
         <Route path = '/currentState' exact element = {<CurrentStatePage/>}/>
-        <Route path = '/totalSetting' exact element = {<TotalSettingPage socket = {socket} groupNum={groupNumber} turn={turn} setTurn={setTurn} groupNumber={groupNumber}/>}/>
+        <Route path = '/totalSetting' exact element = {<TotalSettingPage socket = {socket} groupNum={groupNumber} turn={turn} setTurn={setTurn} />}/>
       </Routes>
     </div>
   );
