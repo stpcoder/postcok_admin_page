@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router';
 import './mainPage.css';
 import { logos } from 'utils/GetLogo';
+import "fonts/fonts.css";
 
 export default function MainPage() {
   const navigate = useNavigate();

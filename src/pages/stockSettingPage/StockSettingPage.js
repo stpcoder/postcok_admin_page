@@ -27,7 +27,11 @@ export default function StockSettingPage() {
           else defaultPutData.count = stockPrice[currStockType][currTurnType];
         });
         const serverUrl = defaultAPI + '/stocks/' + currStockType;
-        await axios.post(serverUrl, defaultPutData);
+        try {
+          await axios.post(serverUrl, defaultPutData);
+        } catch {
+          alert('서버와 통신 중 에러가 발생했습니다. 수정 완료 버튼을 다시 눌러주세요.');
+        }
       });
       alert('수정이 완료되었습니다.');
     }

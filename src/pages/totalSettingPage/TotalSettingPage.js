@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './totalSettingPage.css';
 import { logos } from 'utils/GetLogo';
 import { useNavigate } from 'react-router';
@@ -7,6 +7,9 @@ import { defaultAPI, groupCount } from 'utils/GetConstant';
 import SellTradeLog from './SellLog';
 import SolvingLog from './SolvingLog';
 import PurchaseLog from './PurchaseLog';
+import TempLog from './TempLog';
+const { setIntervalAsync } = require('set-interval-async/dynamic');
+const { clearIntervalAsync } = require('set-interval-async');
 
 const defaultTime = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], 
                     [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],
@@ -15,7 +18,14 @@ const defaultTime = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],
 export default function TotalSettingPage({ socket, turn, setTurn, price }) {
   var tradeDataInterval;
   var groupNum;
+  var tempTrade = [];
+  var tempPurchase = [];
+  var tempAnswerList = [];
+  var tempSuccess = [];
+  const logData = [];
   const groupData = [];
+  const tempTurn = useRef(1);
+  const dataType = useRef('sale');
   const [sellMinute, setSellMinute] = useState(0);
   const [sellSecond, setSellSecond] = useState(0);
   const [solveMinute, setSolveMinute] = useState(0);
@@ -26,89 +36,119 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
   const [sellStart, setSellStart] = useState(false);
   const [solveStart, setSolveStart] = useState(false);
   const [buyStart, setBuyStart] = useState(false);
-  const [localTurn, setLocalTurn] = useState(turn);
+  const [localTurn, setLocalTurn] = useState(1);
   const [gameType, setGameType] = useState(1);
   const [tradeData, setTradeData] = useState([]);
   const [successData, setSuccessData] = useState([]);
   const [answerList, setAnswerList] = useState([]);
   const [purchaseList, setPurchaseList] = useState([]);
+  const [init, setInit] = useState(true);
+  const [defaultTimer, setDefaultTime] = useState([]);
 
-  const getData = (dataType) => {
-    tradeDataInterval = setInterval(async () => {
-      if (dataType === 'sale') {
-        var tradeDataList = await axios.get(defaultAPI + '/trade/all');
-        tradeDataList = tradeDataList.data;
-        var tempTradeData = tradeData;
-        tradeDataList.forEach((element1) => {
-          if (element1.tradeType === 'sale') {
+  const updateDataList = (temp) => {
+    setTradeData(temp);
+  }
+
+  const updatePurchaseList = (temp) => {
+    setPurchaseList(temp);
+  }
+
+  const updataSuccessList = (temp) => {
+    setSuccessData(temp);
+  }
+
+  const makeInterval = async () => {
+    var checkturn = tempTurn.current;
+    console.log('턴 : '+ checkturn + ' 타입 : ' + dataType.current);
+
+    if (dataType.current === 'sale') {
+      var tradeDataList = await axios.get(defaultAPI + '/trade/all');
+      tradeDataList = tradeDataList.data;
+      var tempTradeData = tradeData;
+      if (tempTurn.current === 1) {
+        tempTradeData = tempTrade;
+      }
+      tradeDataList.forEach((element1) => {
+        if (element1.tradeType === 'sale') {
+          if (element1.turn === tempTurn.current) {
             tempTradeData.forEach((element2) => {
               if (element1.teamId === element2.teamId) {
-                element2.bio += element1.bio;
-                element2.construction += element1.construction;
-                element2.broadcast += element1.broadcast;
-                element2.food += element1.food;
-                element2.electronics += element1.electronics;
+                element2.bio = element1.bio;
+                element2.construction = element1.construction;
+                element2.broadcast = element1.broadcast;
+                element2.food = element1.food;
+                element2.electronics = element1.electronics;
+                updateDataList(tempTradeData);
+                tempTrade = tempTradeData;
               }
             });
           }
-        });
-        setTradeData(tempTradeData);
-      }
-    
-      if (dataType === 'purchase') {
-        var i = 1;
-        for (i = 1; i <= groupNum; i++) {
-          var tradeDataList = await axios.get(defaultAPI + '/trade/all');
-          tradeDataList = tradeDataList.data;
-          var tempPurchase = purchaseList;
-          tradeDataList.forEach((element1) => {
-            if (element1.tradeType === 'purchase') {
-              tempPurchase.forEach((element2) => {
-                if (element1.teamId === element2.teamId) {
-                  element2.bio += element1.bio;
-                  element2.construction += element1.construction;
-                  element2.broadcast += element1.broadcast;
-                  element2.food += element1.food;
-                  element2.electronics += element1.electronics;
-                }
-              });
-            }
-          });
-          setPurchaseList(tempPurchase);          
         }
+      });
+    }
+  
+    if (dataType.current === 'purchase') {
+      var i = 1;
+      var tradeDataList = await axios.get(defaultAPI + '/trade/all');
+      tradeDataList = tradeDataList.data;
+      var tempPurchaseList = purchaseList;
+      var tempSuccessList = successData;
+      if (tempTurn.current === 1) {
+        tempPurchaseList = tempPurchase;
+        tempSuccessList = tempSuccess;
+      }
+      tradeDataList.forEach((element1) => {
+        if (element1.tradeType === 'purchase') {
+          if (element1.turn === tempTurn.current) {
+            console.log(tempPurchaseList);
+            tempPurchaseList.forEach((element2) => {
+              if (element1.teamId === element2.teamId) {
+                element2.bio = element1.bio;
+                element2.construction = element1.construction;
+                element2.broadcast = element1.broadcast;
+                element2.food = element1.food;
+                element2.electronics = element1.electronics;
+                updatePurchaseList(tempPurchaseList);          
+                
+                tempSuccessList.forEach((element3) => {
+                  if (element3.teamId === element1.teamId) {
+                    element3.bio = element1.bioSuccess;
+                    element3.construction = element1.constructionSuccess;
+                    element3.broadcast = element1.broadcastSuccess;
+                    element3.food = element1.foodSuccess;
+                    element3.electronics = element1.electronicsSuccess;
+                    updataSuccessList(tempSuccessList);
+                  }
+                });
+              }
+            });
+          }
+        }
+      });
+    }
+  }
 
-        var tempSuccessData = successData;
-        for (i = 1; i <= groupNum; i++) {
-          var successDataList = await axios.get(defaultAPI + '/trade/success', i, localTurn, 'purchase');
-          successDataList = successDataList ? successDataList.data : null;
-          if (successDataList) {
-            tempSuccessData.forEach((element) => {
-              if (element.teamId === successDataList.teamId) {
-                element.bio += successDataList.bio;
-                element.construction += successDataList.construction;
-                element.electronics += successDataList.electronics;
-                element.food += successDataList.food;
-                element.broadcast += successDataList.broadcast;
-              }
-            });
-          }
-        }
-        setSuccessData(tempSuccessData);
-      }
+  const getData = () => {
+    tradeDataInterval = setIntervalAsync(() => {
+      makeInterval();
     }, 1000);
-    return() => clearInterval(tradeDataInterval);
+    return() => clearIntervalAsync(tradeDataInterval);
   }
 
   const sendMoney = async () => {
     var buttonList = document.getElementsByClassName('solvingInput');
     buttonList = Array.prototype.slice.call(buttonList);
-
-    buttonList.forEach(async (element) => {
-      var value = await axios.get(defaultAPI + '/teams/' + element.id + '/cash');
-      var value1 = value.data.cash + element.value;
-      await axios.put(defaultAPI + '/teams/' + element.id + '/cash', {cash : value1});
+    var i = 0;
+    var element = buttonList[i];
+    for(i = 0; i < buttonList.length; i++) {
+      element = buttonList[i];
+      var value = await axios.get(defaultAPI + '/teams/' + element.id);
+      value = value.data;
+      value.cash = ((element.value) ? (Number(element.value) + Number(value.cash)) : (Number(0) + Number(value.cash)));
+      delete value.id;
+      await axios.put(defaultAPI + '/teams/' + element.id, value);
       element.value = 0;
-    });
+    }
   }
 
   const navigate = useNavigate();
@@ -123,6 +163,13 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
       const buyTime =  buyMinute * 60 + buySecond;
       const solveTime = solveMinute * 60 + solveSecond;
       var time;
+
+      if (init) {
+        var tempArr = [sellMinute, sellSecond, solveMinute, solveSecond, buyMinute, buySecond];
+        setDefaultTime(tempArr);
+        setInit(false);
+      }
+
       switch(gameType) {
         case 1:
           time = sellTime;
@@ -133,8 +180,11 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
         case 3:
           time = buyTime;
           break;
+        case 4:
+          time = sellTime;
+          setGameType(1);
+          break;
       }
-      console.log('emit1');
       socket.emit('gameStart', {time : time, gameType : (gameType - 1)});
     }
   }
@@ -157,37 +207,38 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
           time = buyTime;
           break;
       }
-      console.log('emit2');
-
       socket.emit('gameStop', {time : time, gameType : (gameType - 1)});
     }
   }
 
   useEffect(async () => {
+    try {
+      await axios.delete(defaultAPI + '/game/turn');
+      await axios.delete(defaultAPI + '/trade');
+    } catch {
+      alert('초기화 중 에러가 발생했습니다. 다시 실행해주세요.');
+    }
+
     groupNum = await axios.get(defaultAPI + '/teams');
     groupNum = groupNum.data;
     groupNum = groupNum.length;
+    getData();
     var i = 1;
-    var tempTrade = [];
-    var tempPurchase = [];
-    var tempAnswerList = [];
-    var tempSuccessData = [];
     for (i = 1; i <= groupNum; i++) {
       tempTrade.push({teamId : i, bio: 0, electronics: 0, construction : 0, broadcast : 0, food : 0});
       tempPurchase.push({teamId : i, bio: 0, electronics: 0, construction : 0, broadcast : 0, food : 0});
       tempAnswerList.push({teamId : i, answer : null});
-      tempSuccessData.push({teamId : i, bio: 0, electronics: 0, construction : 0, broadcast : 0, food : 0});
+      tempSuccess.push({teamId : i, bio: 0, electronics: 0, construction : 0, broadcast : 0, food : 0});
     }
     setTradeData(tempTrade);
     setPurchaseList(tempPurchase);
     setAnswerList(tempAnswerList);
-    setSuccessData(tempSuccessData);
+    setSuccessData(tempSuccess);
 
     const gameTemp = gameType === 1 ? 'sell' : gameType === 2 ? 'buy' : 'solve';
     document.getElementsByClassName(gameTemp)[0].style.background = "#94A8D6";
     document.getElementsByClassName('turn' + localTurn)[0].style.background = "#94A8D6";
 
-    getData('sale');
     socket.on('answer', (data) => {
       const tempAnswer = tempAnswerList;
       tempAnswer.forEach((element) => {
@@ -216,9 +267,10 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
         case 3:
           time = buyTime;
           break;
+        case 4:
+          time = sellTime;
+          break;
       }
-      console.log('emit3');
-
       socket.emit('gameStart', {time : time, gameType : (gameType - 1)});
     }
 
@@ -232,6 +284,9 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
       case 3:
         setBuyStart(start);
         break;
+      case 4:
+        setSellStart(start);
+        break;
       default:
         break;
     }
@@ -240,31 +295,38 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
   useEffect(() => {
     switch(gameType) {
       case 1:
-      document.getElementsByClassName('buy')[0].style.background = "white";
+        dataType.current = 'sale';
+        document.getElementsByClassName('buy')[0].style.background = "white";
         document.getElementsByClassName('sell')[0].style.background = "#94A8D6";
         setBuyStart(false);
         break;
 
       case 2:
+        dataType.current = 'solving';
+        tradeDataInterval = 0;
         document.getElementsByClassName('sell')[0].style.background = "white";
         document.getElementsByClassName('solve')[0].style.background = "#94A8D6";
         setSellStart(false);
         setSolveStart(true);
         const solveTime = solveMinute * 60 + solveSecond;
-        console.log('emit5');
-
         socket.emit('gameStart', {time : solveTime, gameType : (gameType - 1)});
         break;
 
       case 3:
+        dataType.current = 'purchase';
         document.getElementsByClassName('solve')[0].style.background = "white";
         document.getElementsByClassName('buy')[0].style.background = "#94A8D6";
         setSolveStart(false);
         setBuyStart(true);
         const buyTime = buyMinute * 60 + buySecond;
-        console.log('emit6');
-
         socket.emit('gameStart', {time : buyTime, gameType : (gameType - 1)});
+        break;
+
+      case 4:
+        dataType.current = 'sale';
+        document.getElementsByClassName('buy')[0].style.background = "white";
+        document.getElementsByClassName('sell')[0].style.background = "#94A8D6";
+        setBuyStart(false);
         break;
 
       default:
@@ -275,14 +337,17 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
   useEffect(() => {
     if (sellStart) {
       const sellTimer = setInterval(() => {
-        getData('sale');
         if (sellSecond > 0) {
           setSellSecond(sellSecond - 1);
         } else if (sellSecond === 0) {
           if (sellMinute === 0) {
+            if (localTurn === 10) {
+              alert('게임 종료');
+              return;
+            }
             clearInterval(sellTimer);
             setGameType(2);
-            clearInterval(tradeDataInterval);
+            if (tradeDataInterval) clearIntervalAsync(tradeDataInterval);
           } else {
             setSellMinute(sellMinute - 1);
             setSellSecond(59);
@@ -292,14 +357,13 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
       return () => clearInterval(sellTimer);
     } else if (solveStart) {
       const solveTimer = setInterval(() => {
-        getData('solving');
         if (solveSecond > 0) {
           setSolveSecond(solveSecond - 1);
         } else if (solveSecond === 0) {
           if (solveMinute === 0) {
             clearInterval(solveTimer);
             setGameType(3);
-            clearInterval(tradeDataInterval);
+            if (tradeDataInterval) clearIntervalAsync(tradeDataInterval);
           } else {
             setSolveMinute(solveMinute - 1);
             setSolveSecond(59);
@@ -309,24 +373,31 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
       return () => clearInterval(solveTimer);
     } else if (buyStart) {
       const buyTimer = setInterval(() => {
-        getData('purchase');
         if (buySecond > 0) {
           setBuySecond(buySecond - 1);
         } else if (buySecond === 0) {
           if (buyMinute === 0) {
             clearInterval(buyTimer);
-            setGameType(1);
+            setGameType(4);
             setTimerActive(false);
-            const nextTurn = localTurn === 9 ? 1 : localTurn + 1;
+            const nextTurn = localTurn === 10 ? 1 : localTurn + 1;
             setLocalTurn(nextTurn);
+            tempTurn.current = nextTurn;
             setTurn(nextTurn);
             socket.emit('nextTurn', {nextTurn : nextTurn});
-            console.log(nextTurn);
             socket.emit('endPurchase', {endPurchase : true});
             socket.emit('gameStop', {time : 0, gameType: 0});
             document.getElementsByClassName('turn' + localTurn)[0].style.background = "white";
             document.getElementsByClassName('turn' + nextTurn)[0].style.background = "#94A8D6";
-            clearInterval(tradeDataInterval);
+
+            setBuyMinute(defaultTimer[4]);
+            setBuySecond(defaultTimer[5]);
+            setSellMinute(defaultTimer[0]);
+            setSellSecond(defaultTimer[1]);
+            setSolveMinute(defaultTimer[2]);
+            setSolveSecond(defaultTimer[3]);
+
+            if (tradeDataInterval) clearIntervalAsync(tradeDataInterval);
 
             var tempTradeData = tradeData;
             var tempPurchase = purchaseList;
@@ -525,12 +596,17 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
               <div id="n5_407" class="turn9">
                 <div id="n5_408">9턴</div>
               </div>
+              <div id="n5_407" class="turn10">
+                <div id="n5_409">최종턴</div>
+              </div>
             </div>
             <div id="n5_405">
               {(gameType === 1) && <SellTradeLog sellData={tradeData}/>}
               {(gameType === 2) && <SolvingLog groupData={answerList}/>}
-              {(gameType === 2) && <button id="n5_447" onClick={sendMoney}><div id="n5_449">보내기</div></button>}
-              {(gameType === 3) && <PurchaseLog sellData={tradeData} successData={successData}/>}
+              {(gameType === 2) && <button id="n5_447" onClick={sendMoney}><div id="n5_450">보내기</div></button>}
+              {(gameType === 3) && <PurchaseLog sellData={purchaseList} successData={successData}/>}
+              {(gameType === 4) && <TempLog groupData={answerList} sellData={purchaseList} successData={successData}/>}
+              {(gameType === 4) && <button id="n5_447" onClick={sendMoney}><div id="n5_450">보내기</div></button>}
             </div>
           </div>
         </div>

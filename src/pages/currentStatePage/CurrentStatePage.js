@@ -54,9 +54,9 @@ export default function CurrentStatePage() {
       tempData = await axios.get('http://18.221.173.188:8080/teams');
       tempData = tempData.data;
       tempData.sort((a, b)  => {
-        if(a.asset < b.asset) return 1;
-        if(a.asset === b.asset) return 0;
-        if(a.asset > b.asset) return -1;
+        if(a.cash < b.cash) return 1;
+        if(a.cash === b.cash) return 0;
+        if(a.cash > b.cash) return -1;
       });
       tempData.forEach((oneData) => {
         oneData.rank = index;

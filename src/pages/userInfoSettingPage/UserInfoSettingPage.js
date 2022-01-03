@@ -56,14 +56,18 @@ export default function UserInfoSettingPage() {
     const postTeams = async (j) => {
       const text = defaultAPI + '/teams/' + j;
       const tempText = 'group' + j;
-      await axios.post(text, {
-        "cash": Number(groupStock[tempText]["cash"]),
-        "bio": Number(groupStock[tempText]["bio"]),
-        "electronics": Number(groupStock[tempText]["electronics"]),
-        "construction": Number(groupStock[tempText]["construction"]),
-        "food": Number(groupStock[tempText]["food"]),
-        "broadcast": Number(groupStock[tempText]["broadcast"])
-      });
+      try {
+        await axios.post(text, {
+          "cash": Number(groupStock[tempText]["cash"]),
+          "bio": Number(groupStock[tempText]["bio"]),
+          "electronics": Number(groupStock[tempText]["electronics"]),
+          "construction": Number(groupStock[tempText]["construction"]),
+          "food": Number(groupStock[tempText]["food"]),
+          "broadcast": Number(groupStock[tempText]["broadcast"])
+        });
+      } catch {
+        alert('서버와 통신 중 에러가 발생했습니다. 수정 완료를 다시 눌러주세요.');
+      }
     }
 
     const deleteData = async () => {
