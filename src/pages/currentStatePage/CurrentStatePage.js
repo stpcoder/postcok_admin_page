@@ -46,11 +46,11 @@ function MakeTable( { dataList }) {
 export default function CurrentStatePage() {
   const serverLink = '';
   const [dataList, setDataList] = useState([]);
+  const [init, setInit] = useState(true);
 
   useEffect(() => {
     var tempData;
-    var index = 1;
-    const getData = async () => {
+    const getData = setInterval(async () => {
       tempData = await axios.get('http://18.221.173.188:8080/teams');
       tempData = tempData.data;
       tempData.sort((a, b)  => {
@@ -58,14 +58,23 @@ export default function CurrentStatePage() {
         if(a.cash === b.cash) return 0;
         if(a.cash > b.cash) return -1;
       });
-      tempData.forEach((oneData) => {
-        oneData.rank = index;
-        index++;
-      });
+      var rank = 0;
+      var before = -1;
+      var i = 0;
+      var gap = 0;
+      for (i = 0; i < tempData.length; i++) {
+        if (before !== tempData[i].cash) {
+          rank = i + 1;
+          before = tempData[i].cash;
+          tempData[i].rank = rank;
+          gap = 0;
+        } else {
+          tempData[i].rank = rank;
+          gap++;
+        }
+      }
       setDataList(tempData);
-      alert('데이터를 불러왔습니다.');
-    }
-    getData();
+    }, 1000);
   }, []);
 
   const navigate = useNavigate();

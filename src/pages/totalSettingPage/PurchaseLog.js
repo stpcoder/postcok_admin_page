@@ -6,22 +6,13 @@ function SellTradeRow({sellData, second, third}) {
   const text3 = sellData.construction === 0 ? '' : '건축 ' + sellData.construction + '주, ';
   const text4 = sellData.broadcast === 0 ? '' : '방송 ' + sellData.broadcast + '주, ';
   const text5 = sellData.food === 0 ? '' : '식품 ' + sellData.food + '주';
-
-  const text6 = findRow.bio === 0 ? '' : '생명 ' + findRow.bio + '주, ';
-  const text7 = findRow.electronics === 0 ? '' : '전자 ' + findRow.electronics + '주, ';
-  const text8 = findRow.construction === 0 ? '' : '건축 ' + findRow.construction + '주, ';
-  const text9 = findRow.broadcast === 0 ? '' : '방송 ' + findRow.broadcast + '주, ';
-  const text10 = findRow.food === 0 ? '' : '식품 ' + findRow.food + '주';
-
   const outputFirstText = text1 + text2 + text3 + text4 + text5;
-  const outputSecondText = text6 + text7 + text8 + text9 + text10;
   return (
     <>
       <tbody>
         <tr>
           <td class="n5_1_tg-0pky">{sellData.teamId  + '조'}</td>
           <td class="n5_1_tg-0pky">{outputFirstText}</td>
-          <td class="n5_1_tg-0pky">{outputSecondText}</td>
         </tr>
       </tbody>
     </>
@@ -36,7 +27,6 @@ export default function PurchaseLog({sellData, successData}) {
         <tr>
           <th class="n5_1_tg-7btt">조 이름</th>
           <th class="n5_1_tg-7btt">예약 정보</th>
-          <th class="n5_1_tg-7btt">체결 정보</th>
         </tr>
       </thead>
         {sellData.map((oneData) => (

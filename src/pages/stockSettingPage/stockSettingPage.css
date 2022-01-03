@@ -5,6 +5,7 @@
 }
 
 #n2_192 {
+  font-family: 'malgun';
 	width: 100%;
 	height: 1100px;
 	background-color: #D5DFEF;
@@ -83,7 +84,7 @@
 }
 
 #n2_449 {
-  margin: 9px 0px 0px 38px;
+  margin: 5px 0px 0px 30px;
   font-size: 30px;
   vertical-align: middle;
   justify-content: flex-start;
@@ -100,7 +101,7 @@
 }
 
 #n2_450 {
-  margin: 9px 0px 0px 38px;
+  margin: 5px 0px 0px 30px;
   font-size: 30px;
   vertical-align: middle;
   justify-content: flex-start;

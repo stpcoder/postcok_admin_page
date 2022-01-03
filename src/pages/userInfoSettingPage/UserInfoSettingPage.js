@@ -77,7 +77,11 @@ export default function UserInfoSettingPage() {
 
     deleteData();
     for (var j = 1; j <= groupNum; j++) {
-      postTeams(j);
+      try {
+        postTeams(j);
+      } catch {
+        break;
+      }
     }
     alert('수정이 완료되었습니다.');
   }

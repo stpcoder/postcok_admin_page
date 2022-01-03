@@ -45,29 +45,13 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
   const [init, setInit] = useState(true);
   const [defaultTimer, setDefaultTime] = useState([]);
 
-  const updateDataList = (temp) => {
-    setTradeData(temp);
-  }
-
-  const updatePurchaseList = (temp) => {
-    setPurchaseList(temp);
-  }
-
-  const updataSuccessList = (temp) => {
-    setSuccessData(temp);
-  }
-
   const makeInterval = async () => {
     var checkturn = tempTurn.current;
-    console.log('턴 : '+ checkturn + ' 타입 : ' + dataType.current);
-
+    console.log('턴' + tempTurn.current + '타입' + dataType.current);
     if (dataType.current === 'sale') {
       var tradeDataList = await axios.get(defaultAPI + '/trade/all');
       tradeDataList = tradeDataList.data;
-      var tempTradeData = tradeData;
-      if (tempTurn.current === 1) {
-        tempTradeData = tempTrade;
-      }
+      var tempTradeData = tempTrade;
       tradeDataList.forEach((element1) => {
         if (element1.tradeType === 'sale') {
           if (element1.turn === tempTurn.current) {
@@ -78,10 +62,12 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
                 element2.broadcast = element1.broadcast;
                 element2.food = element1.food;
                 element2.electronics = element1.electronics;
-                updateDataList(tempTradeData);
+                setTradeData(tempTradeData);
+                console.log(tempTradeData);
                 tempTrade = tempTradeData;
               }
             });
+            console.log(tempTradeData);
           }
         }
       });
@@ -91,8 +77,8 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
       var i = 1;
       var tradeDataList = await axios.get(defaultAPI + '/trade/all');
       tradeDataList = tradeDataList.data;
-      var tempPurchaseList = purchaseList;
-      var tempSuccessList = successData;
+      var tempPurchaseList = tempPurchase;
+      var tempSuccessList = tempSuccess;
       if (tempTurn.current === 1) {
         tempPurchaseList = tempPurchase;
         tempSuccessList = tempSuccess;
@@ -100,7 +86,6 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
       tradeDataList.forEach((element1) => {
         if (element1.tradeType === 'purchase') {
           if (element1.turn === tempTurn.current) {
-            console.log(tempPurchaseList);
             tempPurchaseList.forEach((element2) => {
               if (element1.teamId === element2.teamId) {
                 element2.bio = element1.bio;
@@ -108,7 +93,8 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
                 element2.broadcast = element1.broadcast;
                 element2.food = element1.food;
                 element2.electronics = element1.electronics;
-                updatePurchaseList(tempPurchaseList);          
+                tempPurchase = tempPurchaseList
+                setPurchaseList(tempPurchaseList);          
                 
                 tempSuccessList.forEach((element3) => {
                   if (element3.teamId === element1.teamId) {
@@ -117,7 +103,8 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
                     element3.broadcast = element1.broadcastSuccess;
                     element3.food = element1.foodSuccess;
                     element3.electronics = element1.electronicsSuccess;
-                    updataSuccessList(tempSuccessList);
+                    tempSuccess = tempSuccessList;
+                    setSuccessData(tempSuccessList);
                   }
                 });
               }
@@ -126,6 +113,47 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
         }
       });
     }
+  }
+
+  const updateSuccess = async() => {
+    var i = 1;
+    var tradeDataList = await axios.get(defaultAPI + '/trade/all');
+    tradeDataList = tradeDataList.data;
+    var tempPurchaseList = tempPurchase;
+    var tempSuccessList = tempSuccess;
+    if (tempTurn.current === 1) {
+      tempPurchaseList = tempPurchase;
+      tempSuccessList = tempSuccess;
+    }
+    tradeDataList.forEach((element1) => {
+      if (element1.tradeType === 'purchase') {
+        if (element1.turn === (tempTurn.current - 1)) {
+          tempPurchaseList.forEach((element2) => {
+            if (element1.teamId === element2.teamId) {
+              element2.bio = element1.bio;
+              element2.construction = element1.construction;
+              element2.broadcast = element1.broadcast;
+              element2.food = element1.food;
+              element2.electronics = element1.electronics;
+              tempPurchase = tempPurchaseList
+              setPurchaseList(tempPurchaseList);          
+              
+              tempSuccessList.forEach((element3) => {
+                if (element3.teamId === element1.teamId) {
+                  element3.bio = element1.bioSuccess;
+                  element3.construction = element1.constructionSuccess;
+                  element3.broadcast = element1.broadcastSuccess;
+                  element3.food = element1.foodSuccess;
+                  element3.electronics = element1.electronicsSuccess;
+                  tempSuccess = tempSuccessList;
+                  setSuccessData(tempSuccessList);
+                }
+              });
+            }
+          });
+        }
+      }
+    });
   }
 
   const getData = () => {
@@ -313,7 +341,7 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
         break;
 
       case 3:
-        dataType.current = 'purchase';
+        dataType.current = 'purchase'
         document.getElementsByClassName('solve')[0].style.background = "white";
         document.getElementsByClassName('buy')[0].style.background = "#94A8D6";
         setSolveStart(false);
@@ -341,13 +369,8 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
           setSellSecond(sellSecond - 1);
         } else if (sellSecond === 0) {
           if (sellMinute === 0) {
-            if (localTurn === 10) {
-              alert('게임 종료');
-              return;
-            }
             clearInterval(sellTimer);
             setGameType(2);
-            if (tradeDataInterval) clearIntervalAsync(tradeDataInterval);
           } else {
             setSellMinute(sellMinute - 1);
             setSellSecond(59);
@@ -363,7 +386,6 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
           if (solveMinute === 0) {
             clearInterval(solveTimer);
             setGameType(3);
-            if (tradeDataInterval) clearIntervalAsync(tradeDataInterval);
           } else {
             setSolveMinute(solveMinute - 1);
             setSolveSecond(59);
@@ -390,14 +412,14 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
             document.getElementsByClassName('turn' + localTurn)[0].style.background = "white";
             document.getElementsByClassName('turn' + nextTurn)[0].style.background = "#94A8D6";
 
+            updateSuccess();
+
             setBuyMinute(defaultTimer[4]);
             setBuySecond(defaultTimer[5]);
             setSellMinute(defaultTimer[0]);
             setSellSecond(defaultTimer[1]);
             setSolveMinute(defaultTimer[2]);
             setSolveSecond(defaultTimer[3]);
-
-            if (tradeDataInterval) clearIntervalAsync(tradeDataInterval);
 
             var tempTradeData = tradeData;
             var tempPurchase = purchaseList;
@@ -427,7 +449,7 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
             tempAnswerList.forEach((element) => {
               element.answer = null;
             });
-            setTradeData(tempTradeData);
+            // setTradeData(tempTradeData);
             setPurchaseList(tempPurchase);
             setSuccessData(tempSuccessData);
             setAnswerList(tempAnswerList);
@@ -603,10 +625,9 @@ export default function TotalSettingPage({ socket, turn, setTurn, price }) {
             <div id="n5_405">
               {(gameType === 1) && <SellTradeLog sellData={tradeData}/>}
               {(gameType === 2) && <SolvingLog groupData={answerList}/>}
-              {(gameType === 2) && <button id="n5_447" onClick={sendMoney}><div id="n5_450">보내기</div></button>}
               {(gameType === 3) && <PurchaseLog sellData={purchaseList} successData={successData}/>}
               {(gameType === 4) && <TempLog groupData={answerList} sellData={purchaseList} successData={successData}/>}
-              {(gameType === 4) && <button id="n5_447" onClick={sendMoney}><div id="n5_450">보내기</div></button>}
+              {(gameType === 4 || gameType === 2) && <button id="n5_4447" onClick={sendMoney}><div id="n5_4449">보내기</div></button>}
             </div>
           </div>
         </div>
